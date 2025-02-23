@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+
+
+.dark{
+   
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.light{
+  
+    background-color: #ffffff;
+}
+
+
+.startup{
+    background-image: url(../src/assets/startup-bg.gif);
+    z-index: -1;
+    background-size: cover;
+}
+
+.log{
+    background-image: url(../src/assets/lgo.png);
+    background-size:contain ;
+    background-position: center center;
+
+}
