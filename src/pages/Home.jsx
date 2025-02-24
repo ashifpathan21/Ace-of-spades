@@ -13,6 +13,12 @@ import HeroSection from "../components/HeroSection.jsx";
 import StartWith from '../components/Startwith0.jsx' 
 import Courses from '../components/Courses.jsx' 
 import Startup from '../components/Startup.jsx' 
+import ImageSlider from '../components/ImageSlider.jsx' 
+import WhyUs from '../components/WhyUs.jsx' 
+import Footer from '../components/Footer.jsx'
+import SliderData from './SliderData.js' 
+
+
 
 
 const Home = () => {
@@ -20,7 +26,7 @@ const Home = () => {
 
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [profileModal , setProfileModal] = useState(false);
-  const [isLoggedIn , setIsLoggedIn] = useState(false)
+  const [isLoggedIn , setIsLoggedIn] = useState(true)
 
 
 
@@ -32,7 +38,13 @@ const Home = () => {
         <Courses/>
      <Startup isDarkMode={isDarkMode}  />
       
+     <div className="text-2xl mb-5 font-bold flex justify-center uppercase" >our team</div>
+    <ImageSlider images={SliderData}/>
 
+
+    <WhyUs images={SliderData}/>
+
+    <Footer />
 
       </div>
     );

@@ -1,0 +1,42 @@
+/* Background effect styles */
+.gradient-bg {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  
+  .gradient-bg::before {
+    content: '';
+    position: absolute;
+    width: 200vmax;
+    height: 200vmax;
+    background: conic-gradient(
+      from 0deg,
+      #ff6b6b,
+      #4ecdc4,
+      #45b7d1,
+      #ff6b6b
+    );
+    animation: rotate 20s linear infinite;
+    filter: blur(100px);
+    opacity: 0.4;
+  }
+  
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Ensure page content stays on top */
+  .content {
+    position: relative;
+    z-index: 1;
+  }

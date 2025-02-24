@@ -52,18 +52,18 @@ const HeroSection = (props) =>{
 
 
 return (
-    <div className={`h-80 md:h-100 lg:h-100 transition-all duration-1000 mt-20 relative w-full`}>
-        <img src={Hero} className='h-full w-full absolute object-cover' />
+    <div className={`h-60  transition-all mt-10 mb-20 duration-1000 flex items-center justify-center  relative w-full`}>
+      
 
-        <div className='flex absolute ml-10 -mt-2 justify-center items-center md:mt-20 lg:mt-20 p-2 flex-col'>
-          <h2 className='text-lg box font-semibold'>Be the <span className='text-fuchsia-600 text-2xl font-bold'>#1</span> Ace the World 🌍</h2>
-          <h2 className='text-lg -mt-1 box font-semibold'>Step by Step Guide to Learn</h2>
-          <h2 className={`text-lg font-bold px-4 box mt-1 p-1 rounded-lg ${props.isDarkMode ? 'bg-white text-black' : 'bg-black text-white'} md:mt-3 lg:mt-5 text-center transition-colors duration-1000`}>
+        <div className='flex my-auto ml-10  justify-center h-full items-center md:mt-20 lg:mt-20 p-2 flex-col'>
+          <h2 className='text-xl md:text-2xl lg:text-3xl box font-bold'>Be the <span className='text-fuchsia-600 text-4xl font-bold'>#1</span> Ace the World </h2>
+          <h2 className='text-md md:text-lg lg:text-lg mt-1 box font-semibold'>Step by Step Guide to Learn</h2>
+          <h2 className={`lg:text-5xl text-2xl md:text-4xl font-bold px-4 box mt-1 p-1 rounded-lg  md:mt-3 lg:mt-5 text-center transition-colors duration-500`}>
           <span className="changing-text">DSA</span>
           </h2>
         </div>
 
-        <div className={`absolute p-2 right-10 md:right-30 lg:right-40 flex-col justify-between ${props.profileModal ? 'transition-all duration-1000 flex' : 'transition-all duration-1000 hidden'} ${props.isDarkMode ? 'bg-white text-black' : 'bg-black text-white'} transition-all duration-1000 rounded-lg h-[100px] w-40 top-1`}>
+        <div className={`absolute p-2 mt-10 lg:mt-0 md:mt-5 right-10 md:right-30 lg:right-40 flex-col  justify-between ${props.profileModal ? 'transition-all duration-1000 flex' : 'transition-all duration-1000 hidden'} ${props.isDarkMode ? 'bg-white text-black' : 'bg-black text-white'} transition-all duration-1000 rounded-lg h-[100px] w-40 top-1`}>
           <button className='flex justify-center items-center w-full h-[48%]'>
           My Profile
           </button>

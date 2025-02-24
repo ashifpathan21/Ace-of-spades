@@ -28,14 +28,35 @@ const Navbar = (props) => {
   const navigate= useNavigate()
 
 
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setShowNavbar(false); // स्क्रॉल करने पर navbar छुपेगा
+      } else {
+        setShowNavbar(true);  // ऊपर स्क्रॉल करने पर दिखेगा
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
 
   return (
-    <div className='transition w-screen absolute top-0 duration-3000'>
+    <div className={`transition bg-transparent ${
+      showNavbar ? "translate-y-0" : "-translate-y-full"
+    } backdrop-blur-sm z-10 w-screen fixed top-0 duration-1000`}>
     {/* navbar */}
-    <div className='lg:max-w-[1080px] md:max-w-[950px] w-screen  mx-auto flex justify-between px-3 h-20 '>
-      <div className='flex transition duration-200  justify-center relative top-0'>
-        <img src={logo} className='h-[90%] transition-all duration-2000 object-cover' />
+    <div className='lg:max-w-[1080px] md:max-w-[900px] max-w-[600px] w-full  mx-auto flex justify-between px-3 h-20 '>
+      <div className='flex transition p-5 duration-200 items-center   justify-center '>
+       <h2 className=' md:text-2xl text-lg lg:text-2xl font-semibold lg:font-bold font-serif  '> Ace of $pades</h2>
       </div>
 
 
@@ -75,20 +96,21 @@ props.isLoggedIn? (
 
   </div>
 ) : (
-  <div className='flex items-center p-0  w-[50%] md:p-2 lg:p-2 md:gap-2 lg:gap-2 -mr-5 md:mr-10 lg:mr-10 gap-1'>
+  <div className='flex items-center p-0  md:p-2 lg:p-2 md:gap-2 lg:gap-2 -mr-5 md:mr-10 lg:mr-10 gap-1'>
 
 <button  onClick={()=>{
           navigate('/signup')
          
-         }} className={props.isDarkMode? ("bg-white transition-all duration-1000  text-black p-2 font-semibold  rounded-lg ") : ("bg-black transition-all duration-1000  text-white p-2 font-semibold  rounded-lg ")}>
+         }} className=' backdrop-blur-lg transition-all  duration-500  p-2 font-semibold  rounded-2xl'>
           SignUp
           </button>
-         <button onClick={()=>{
+<button  onClick={()=>{
           navigate('/login')
-       
-         }} className={props.isDarkMode? ("bg-white transition-all duration-1000 text-black p-2 font-semibold  rounded-lg ") : ("bg-black transition-all duration-1000  text-white p-2 font-semibold  rounded-lg ")}>
+         
+         }} className=' backdrop-blur-lg transition-all  duration-500  p-2 font-semibold  rounded-2xl '>
           LogIn
           </button>
+        
   </div>
 )
 }

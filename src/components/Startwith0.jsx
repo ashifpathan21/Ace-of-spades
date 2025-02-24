@@ -8,12 +8,14 @@ import Navbar from "../components/Navbar.jsx";
 import Hero from '../assets/hero.gif'
 import Start from '../assets/start.jpg'
 import HeroSection from "../components/HeroSection.jsx";
+import Tilt from 'react-parallax-tilt';
 const Startwith0 = (props) => {
 
 
   return (
-    <div className=' w-full h-80 p-3 border-b border-amber-200'>
-    <h1 className='w-full text-center py-2 text-2xl font-bold transition-all duration-500'>Beginner</h1>
+    <div className='mt-10 '>
+  <Tilt glareEnable={true} glareMaxOpacity={0.9} glareColor="blue" glarePosition="all" glareBorderRadius="20px"  className=' w-full lg:max-w-[1000px] md:max-w-[800px] max-w-[500px] mx-auto h-80 p-3 '>
+    <h1 className='w-full  text-center py-2 text-2xl font-bold transition-all duration-500'>Beginner</h1>
 
    <div className='h-[95%] max-w-[1000px] p-2 mx-auto w-full flex  justify-between'>
     <div className=' p-2 flex flex-col justify-start items-center h-[80%] w-[48%] '>
@@ -35,8 +37,10 @@ const Startwith0 = (props) => {
    </div>
 
 
-</div>
+</Tilt>
 
+    </div>
+  
   )
 }
 

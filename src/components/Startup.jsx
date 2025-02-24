@@ -12,16 +12,18 @@ import startup from '../assets/startup.gif'
 import HeroSection from "../components/HeroSection.jsx";
 import StartWith from '../components/Startwith0.jsx' 
 import Courses from '../components/Courses.jsx' 
+import Tilt from 'react-parallax-tilt';
 const Startup = (props) => {
   return (
-    <div className=' w-full h-80 p-3 relative border-b startup border-amber-200'>
-    <h1 className='w-full  text-center py-2 text-2xl text-white font-bold transition-all  duration-500'>Have Some Idea ?</h1>
+    <div className='mb-25 w-full  h-80 p-3 relative '>
+      
+    <h1 className='w-full  text-center py-2 text-2xl  font-bold transition-all  duration-500'>Have Some Idea ?</h1>
 
 
-
+    <Tilt glareEnable={true} glareMaxOpacity={0.9} glareColor="pink" glarePosition="all" glareBorderRadius="20px"  className=' w-full lg:max-w-[1000px] md:max-w-[800px] max-w-[500px] mx-auto h-80 p-3 '>
    <div className='h-[95%] max-w-[1000px] p-2 mx-auto w-full flex  justify-between'>
 
-    <div className=' p-2 flex flex-col text-white justify-start items-center h-[80%] w-[48%] '>
+    <div className=' p-2 flex flex-col  justify-start items-center h-[80%] w-[48%] '>
       
     <h2 className='font-bold text-xl  p-2'>Startup Support </h2>
         <ul className='p-3 list-disc space-y-1 md:text-xl lg:text-2xl font-semibold'>
@@ -40,7 +42,7 @@ const Startup = (props) => {
     </div>
 
    </div>
-
+</Tilt>
 
 </div>
   )
