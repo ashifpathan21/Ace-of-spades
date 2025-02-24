@@ -63,7 +63,7 @@ return (
           </h2>
         </div>
 
-        <div className={`absolute p-2 mt-10 lg:mt-0 md:mt-5 right-10 md:right-30 lg:right-40 flex-col  justify-between ${props.profileModal ? 'transition-all duration-1000 flex' : 'transition-all duration-1000 hidden'} ${props.isDarkMode ? 'bg-white text-black' : 'bg-black text-white'} transition-all duration-1000 rounded-lg h-[100px] w-40 top-1`}>
+        <div className={`absolute p-2 mt-10  right-10 md:right-30 lg:right-40 flex-col  justify-between ${props.profileModal ? 'transition-all duration-1000 flex' : 'transition-all duration-1000 hidden'} ${props.isDarkMode ? 'bg-white text-black' : 'bg-black text-white'} transition-all duration-1000 rounded-lg h-[100px] w-40 top-1`}>
           <button className='flex justify-center items-center w-full h-[48%]'>
           My Profile
           </button>
