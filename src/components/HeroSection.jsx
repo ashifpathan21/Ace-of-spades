@@ -58,7 +58,7 @@ return (
         <div className='flex my-auto ml-10  justify-center h-full items-center md:mt-20 lg:mt-20 p-2 flex-col'>
           <h2 className='text-xl md:text-2xl lg:text-3xl box font-bold'>Be the <span className='text-fuchsia-600 text-4xl font-bold'>#1</span> Ace the World </h2>
           <h2 className='text-md md:text-lg lg:text-lg mt-1 box font-semibold'>Step by Step Guide to Learn</h2>
-          <h2 className={`lg:text-5xl text-2xl md:text-4xl font-bold px-4 box mt-1 p-1 rounded-lg  md:mt-3 lg:mt-5 text-center transition-colors duration-500`}>
+          <h2 className={`lg:text-5xl text-xl md:text-4xl font-bold px-4 box mt-1 p-1 rounded-lg  md:mt-3 lg:mt-5 text-center transition-colors duration-500`}>
           <span className="changing-text">DSA</span>
           </h2>
         </div>
