@@ -14,7 +14,7 @@ const {mode } = props ;
 const [showPassword, setShowPassword] = useState(false);
 
 return (
-    <div className='min-h-screen w-full flex flex-col items-center p-4 log text-white'>
+    <div className='min-h-screen w-full flex flex-col items-center p-4 text-white'>
         <div className='grid grid-cols-2 px-3 py-2 w-full max-w-[550px] mb-5 mt-3 bg-white text-black rounded-lg items-center'>
             <button onClick={() => {
                     navigate('/login')
