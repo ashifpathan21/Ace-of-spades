@@ -52,13 +52,13 @@ const HeroSection = (props) =>{
 
 
 return (
-    <div className={`h-60  transition-all mt-10 mb-20 duration-1000 flex items-center justify-center  relative w-full`}>
+    <div className={`h-60  transition-all mt-20 mb-10 md:mb-20 lg:mb-20 duration-1000 flex items-center justify-center  relative w-full`}>
       
 
         <div className='flex my-auto ml-10  justify-center h-full items-center md:mt-20 lg:mt-20 p-2 flex-col'>
           <h2 className='text-xl md:text-2xl lg:text-3xl box font-bold'>Be the <span className='text-fuchsia-600 text-4xl font-bold'>#1</span> Ace the World </h2>
           <h2 className='text-md md:text-lg lg:text-lg mt-1 box font-semibold'>Step by Step Guide to Learn</h2>
-          <h2 className={`lg:text-5xl text-xl md:text-4xl font-bold px-4 box mt-1 p-1 rounded-lg  md:mt-3 lg:mt-5 text-center transition-colors duration-500`}>
+          <h2 className={`text-5xl   w-full  md:font-bold lg:font-bold font-lg px-4 box mt-1 p-1 rounded-lg  md:mt-3 lg:mt-5 text-center transition-colors duration-500`}>
           <span className="changing-text">DSA</span>
           </h2>
         </div>
