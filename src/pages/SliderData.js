@@ -4,7 +4,7 @@ const SliderData = [
     id: 1,
     name: "Ashif Pathan",
     job: "Founder",
-    image: "https://media.licdn.com/dms/image/v2/D5603AQF9A3ikTAdVHQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1720423697954?e=1746057600&v=beta&t=KBroyo87SFFY6LTZsm7s3x0SNuGZvYF92c63FF3B2MI",
+    image: "https://media.licdn.com/dms/image/v2/D5603AQGQVvx5ic6SFA/profile-displayphoto-shrink_200_200/B56ZVB_vk4GsAY-/0/1740568985324?e=1746057600&v=beta&t=y9zR2OwTwprkaq0ANWKq2MSBtksYbMlM1uK38B_83mk",
     width: 20,
     text: "As the founder, I am committed to driving our company's growth and success through innovation, dedication, and a relentless pursuit of excellence.",
   },
