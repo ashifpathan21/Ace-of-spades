@@ -41,7 +41,7 @@ const SliderData = [
     image: 'https://media.licdn.com/dms/image/v2/D4E03AQFf62RHOaZr8Q/profile-displayphoto-shrink_400_400/B4EZPG4K84HwAo-/0/1734208436020?e=2147483647&v=beta&t=lx4hih5e2CYEUf_0dZzwhaTVgYuxBX2oXVVWHGyG4nI',
     alt:'Image 5',
     width: 20,
-    text: 'I am a dedicated JaWebva Developer , I give my best to this company '
+    text: 'I am a dedicated Web Developer , I give my best to this company '
   }
 ];
   
