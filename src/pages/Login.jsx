@@ -6,8 +6,7 @@ const[ mode , setMode] = useState('login')
 
   return (
     <div>
-        <Details mode={mode} setMode={setMode}/>
-      
+        <Details mode={mode} setMode={setMode}/> 
     </div>
   )
 }

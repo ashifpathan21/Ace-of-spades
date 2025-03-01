@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import light from '../assets/light.png';
-import dark from '../assets/dark.png';
 import '../index.css'
 import gsap from 'gsap'; 
 import { useGSAP } from '@gsap/react';
@@ -8,7 +6,7 @@ import Navbar from "../components/Navbar.jsx";
 import Hero from '../assets/hero.gif'
 
 
-const HeroSection = (props) =>{
+const HeroSection = () =>{
 
     useGSAP(() => {
         // gsap code here...
@@ -63,17 +61,6 @@ return (
           </h2>
         </div>
 
-        <div className={`absolute p-2   right-10 md:right-30 lg:right-40 flex-col  justify-between ${props.profileModal ? 'transition-all duration-1000 flex' : 'transition-all duration-1000 hidden'} ${props.isDarkMode ? 'bg-white text-black' : 'bg-black text-white'} transition-all duration-1000 rounded-lg h-[100px] w-40 top-1`}>
-          <button className='flex justify-center items-center w-full h-[48%]'>
-          My Profile
-          </button>
-          <button onClick={() => {
-          props.setIsLoggedIn(false);
-          props.setProfileModal(false);
-          }} className='flex justify-center items-center w-full h-[48%]'>
-          Log Out
-          </button>
-        </div>
       </div>
 
 
