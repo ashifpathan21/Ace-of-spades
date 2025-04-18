@@ -64,6 +64,7 @@ export default function QuestionForm(props) {
     if (!option.trim() || options.length >= 4) return;
     setWaiting(true);
     try {
+      
       await dispatch(addOption({ questionId, optionText: option }, token));
       setOptions([...options, option]);
       if (options.length === 3) setStep("correctOption");
