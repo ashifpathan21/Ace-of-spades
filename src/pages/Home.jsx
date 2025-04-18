@@ -65,7 +65,7 @@ const Home = () => {
     const { user } = useSelector((state) => state.user);
 
    
-    const [messages , setMessages] = useState( sessionStorage.getItem('messages') ||[])
+    const [messages , setMessages] = useState([])
    
     
   //getting category for update form we have to take it from the sessionStorage for optimising --- pending //completed
