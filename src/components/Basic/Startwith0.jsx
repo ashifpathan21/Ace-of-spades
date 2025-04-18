@@ -5,9 +5,12 @@ import Hero from '../../assets/hero.gif'
 import Start from '../../assets/start.jpg'
 import HeroSection from "./HeroSection.jsx";
 import Tilt from 'react-parallax-tilt';
+import { useSelector, useDispatch } from 'react-redux';
+
 const Startwith0 = (props) => {
 
   const navigate = useNavigate()
+  const {user } = useSelector((state) => state.user) ;
 
   return (
     <div className='mt-10 '>
@@ -30,7 +33,9 @@ const Startwith0 = (props) => {
       <img src={Start} className='rounded-lg object-cover drop-shadow-2xl' />
 
       <button onClick={()=> {
-       navigate('/courses/67dc15660de58b9604033950')
+
+
+          user && navigate('/courses/67dc15660de58b9604033950')
       }} className={props.isDarkMode? ("bg-white transition-all lg:w-75  md:w-70 w-full  hover:bg-amber-100 duration-1000  text-black p-2 font-semibold  rounded-lg ") : ("bg-black transition-all hover:bg-gray-800 duration-1000  text-white p-2 font-semibold lg:w-75  md:w-70 w-full rounded-lg")}>Start with 0</button>
     </div>
    </div>

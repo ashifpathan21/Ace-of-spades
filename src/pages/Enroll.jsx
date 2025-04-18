@@ -15,6 +15,10 @@ const navigate = useNavigate()
     const {courses} = useSelector((state) => state.courses)
    
     const [course , setCourse] = useState('') 
+
+    if(!user){
+      navigate('/login')
+    }
     
     useEffect(() => {
      const  payload =   courses.filter((course) => course._id === id)[0] ; 
@@ -92,11 +96,11 @@ const navigate = useNavigate()
    
 </ul>
 
-         {  course.price === 0 &&   <button onClick={() =>
-              {user.courses.some(c => c._id === course._id) ? navigate(`/courses/progress/${course._id}`) :  addCourses()}
+         {  course?.price === 0 &&   <button onClick={() =>
+              {user?.courses?.some(c => c._id === course._id) ? navigate(`/courses/progress/${course._id}`) :  addCourses()}
               } className={`p-2 text-xl capitalize ${user.courses.some(c => c._id === course._id) ? 'bg-green-400' :' bg-blue-400'} rounded-lg mt-10  text-slate-200 font-semibold `} 
               >
-                {user.courses.some(c => c._id === course._id) ? "Go to Course" : "Enroll Now"}</button>
+                {user?.courses?.some(c => c._id === course._id) ? "Go to Course" : "Enroll Now"}</button>
           }  </div>
        </div>
 
