@@ -1,15 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import '../index.css'
 import gsap from 'gsap'; 
+import {debounce} from 'lodash';
+import axios from 'axios'
 import { useGSAP } from '@gsap/react';
-import Navbar from "../components/Navbar.jsx";
+import Navbar from "../components/Basic/Navbar.jsx";
 import Hero from '../assets/hero.gif'
 import {  useNavigate} from "react-router-dom";
 import Tilt from 'react-parallax-tilt';
 import AddFriend from '../components/AddFriend.jsx'
+import {useDispatch , useSelector} from 'react-redux' 
+import {findFriend} from '../services/operations/friendApi.js'
 const FindFriends = () => {
+  const { user } = useSelector((state) => state.user);
   const navigate = useNavigate()
-    const [search, setSearch] = useState(false)
+  const dispatch = useDispatch() ;
+  const [friends , setFriends] = useState([])
+  const token = localStorage.getItem('token')
+
+const [loading , setLoading] = useState(false) ;
+const [userName , setUserName] = useState('')
+
+    const findFriends = async (userName) => {
+  setLoading(true)
+      try {
+      
+       const Friend = await dispatch(findFriend({userName} , token)) ;
+       const result = Friend.filter((friend ) => friend._id != user._id) ;
+       setFriends(result)
+
+      } catch (error) {
+        
+        // console.error("Error finding friends:", error);
+      }
+      setLoading(false)
+    };
+  
+    const debouncedCheckUserName = React.useMemo(() => debounce(findFriends, 500), []);
+  
+    useEffect(() => {
+      if (userName.length > 2) {
+        debouncedCheckUserName(userName);
+      } 
+
+    }, [userName, debouncedCheckUserName]);
+  
+
   return (
     <div>
 
@@ -35,7 +71,9 @@ const FindFriends = () => {
          
           <div className='flex flex-col w-full  '>
            <div className='p-3 mb-5  gap-2 flex '>
-               <input type="text" placeholder='   enter @username' className='bg-white p-2 h-10 text-black w-full rounded-lg' />
+               <input type="text" value={userName} onChange={(e) => {
+                setUserName(e.target.value)
+               }} placeholder='   enter @username' className='bg-white p-2 h-10 text-black w-full rounded-lg' />
                 <button onClick={()=>{
                     setSearch(true)
                 }} className='bg-green-400 p-2 rounded-lg '><i className="font-semibold ri-search-line"></i></button>
@@ -44,7 +82,15 @@ const FindFriends = () => {
 
         <div className='max-w-[450px] md:max-w-[700px] lg:max-w-[900px]   flex flex-col p-2 gap-4'>
 
-         <AddFriend search={search}/>
+         {
+          loading ? <div className='w-full gap-3 mb-10 flex justify-center items-center'>
+            <span className='loader'></span>
+          </div> : friends?.length > 0 ? friends.map((friend , i ) => <AddFriend key={i} user={user} friend={friend} />) : <div  className='w-full h-90 flex justify-center items-center'>
+            <p  className='text-center text-lg'>
+              No User Found !
+            </p>
+          </div>
+         }
 
         </div>
 

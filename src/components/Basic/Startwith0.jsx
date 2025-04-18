@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import light from '../assets/light.png';
-import dark from '../assets/dark.png';
-import '../index.css'
-import gsap from 'gsap'; 
-import { useGSAP } from '@gsap/react';
-import Navbar from "../components/Navbar.jsx";
-import Hero from '../assets/hero.gif'
-import Start from '../assets/start.jpg'
-import HeroSection from "../components/HeroSection.jsx";
+import Navbar from "./Navbar.jsx";
+import Hero from '../../assets/hero.gif'
+import Start from '../../assets/start.jpg'
+import HeroSection from "./HeroSection.jsx";
 import Tilt from 'react-parallax-tilt';
 const Startwith0 = (props) => {
 

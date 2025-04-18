@@ -1,5 +1,5 @@
 import React , {useState} from 'react'
-import Details from '../components/Details.jsx'
+import Details from '../../components/Auth/Details.jsx'
 
 const Login = () => {
 const[ mode , setMode] = useState('login')

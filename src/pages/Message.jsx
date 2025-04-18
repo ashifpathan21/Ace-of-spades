@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from "../components/Navbar.jsx";
+import Navbar from "../components/Basic/Navbar.jsx";
 import ChatFriend from "../components/ChatFriend.jsx";
 import { useSelector, useDispatch } from 'react-redux';
 

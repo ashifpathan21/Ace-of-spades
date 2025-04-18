@@ -1,21 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import Modals from "../components/Modals.jsx";
-import '../index.css';
+import React, { useEffect, useState , useContext} from 'react';
+import Modals from "./Modals.jsx";
+import '../../index.css';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleDarkMode, setIsLoggedIn , toggleProfileModal, setProfileModal ,  toggleShowMenu } from '../Slices/pagesSlice';
+import { toggleDarkMode, setIsLoggedIn , toggleProfileModal, setProfileModal ,  toggleShowMenu } from '../../Slices/pagesSlice';
 
+import { SocketContext } from '../../Socket/SocketContex'
 
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isDarkMode, isLoggedIn, showMenu, profileModal } = useSelector((state) => state.pages);
-        const {user } = useSelector((state) => state.user) ;
+  const socket = useContext(SocketContext)
 
+  const { isDarkMode, isLoggedIn, showMenu, profileModal } = useSelector((state) => state.pages);
+  const {user } = useSelector((state) => state.user) ;
+
+  const [instructor , setInstructor] = useState(false)
+
+  useEffect(() => {
+   dispatch(setProfileModal(false)) ;
+   showMenu && dispatch(toggleShowMenu())
+
+  } , [])
+  
+  
   const toggleMode = () => {
     dispatch(toggleDarkMode());
   };
+
+
+  useEffect(() => {
+    if(socket && user?._id){
+     socket.emit('join' , {userId: user._id}) ;
+    // console.log(user) ;
+    }
+    }, [socket , user?._id])
+    
+
 
   useEffect(() => {
     if (isDarkMode) {
@@ -30,6 +52,14 @@ const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
+  useEffect(()=>{
+    if(user?.accountType ==='Instructor'){
+      setInstructor(true) ;
+    }
+  
+  } , [user])
+
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
@@ -39,6 +69,8 @@ const Navbar = () => {
       }
     
     };
+
+    
 
     window.addEventListener('scroll', handleScroll);
 
@@ -51,7 +83,7 @@ const Navbar = () => {
 
   return (
     <div>
-       <div className={`transition bg-transparent ${showNavbar ? "translate-y-0" : "-translate-y-full"} backdrop-blur-sm z-10 w-screen fixed top-0 duration-1000`}>
+       <div className={`transition bg-transparent ${showNavbar ? "translate-y-0" : "-translate-y-full"} backdrop-blur-sm z-10 w-screen fixed top-0 duration-500`}>
       <div className='lg:max-w-[1080px] md:max-w-[900px] max-w-[600px] w-full mx-auto flex justify-between px-3 h-20'>
         <div 
           onClick={() => { navigate('/') }} 
@@ -83,9 +115,10 @@ const Navbar = () => {
                     className=' transition-all duration-1000 h-[40px] w-[40px] rounded-full'
                   >
                     <img 
-                      className='rounded-full  object-cover' 
-                      src={user.img} 
+                      className='rounded-full aspect-square overflow-hidden  object-cover' 
+                      src={user?.image} 
                       alt="Profile" 
+                      
                     />
                   </div>
                 </div>
@@ -120,7 +153,7 @@ const Navbar = () => {
     </div>
     {
       isLoggedIn?
-        <Modals  setIsLoggedIn={setIsLoggedIn} showMenu={showMenu} isDarkMode={isDarkMode}  profileModal={profileModal} setProfileModal={setProfileModal}/> : ''
+        <Modals  instructor={instructor} setIsLoggedIn={setIsLoggedIn} showMenu={showMenu} isDarkMode={isDarkMode}  profileModal={profileModal} setProfileModal={setProfileModal}/> : ''
     }
       
     </div>

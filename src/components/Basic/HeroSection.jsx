@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import '../index.css'
 import gsap from 'gsap'; 
 import { useGSAP } from '@gsap/react';
-import Navbar from "../components/Navbar.jsx";
-import Hero from '../assets/hero.gif'
+import Navbar from "./Navbar.jsx";
+import Hero from '../../assets/hero.gif'
 
 
 const HeroSection = () =>{

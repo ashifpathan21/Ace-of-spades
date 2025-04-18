@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from "../components/Navbar.jsx";
 import '../index.css'
-import Modals from "../components/Modals.jsx";
-import Category from "../components/Category.jsx";
-import CourseProgress from "../components/CourseProgress.jsx";
+import Category from "../components/Basic/Category.jsx";
+import CourseProgress from "../components/Profile/CourseProgress.jsx";
 import Tilt from 'react-parallax-tilt';
 import {useNavigate} from 'react-router-dom'
-import Course from "../components/Course";
+import Course from "../components/Basic/Course";
 import { useSelector, useDispatch } from 'react-redux';
+
 const Courses = () => {
+  
   const [activeCategory, setActiveCategory] = useState('All');
-  const {courses } = useSelector((state) => state.courses) ;
-const navigate = useNavigate()
+  const {courses, categories } = useSelector((state) => state.courses) ;
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+
+
   return (
     <div>
      
@@ -35,7 +38,7 @@ const navigate = useNavigate()
            } )
   ): (
   courses
-    .filter((course) => course.category === activeCategory)
+    .filter((course) => course?.category?._id === activeCategory)
     .map((course, index) => {
     return <Course key={index} course={course} />;
     })

@@ -1,5 +1,6 @@
 // src/components/ImageSlider.js
-import React from 'react';
+import React , {useState} from 'react';
+import {useNavigate} from 'react-router-dom'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,6 +8,8 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import Tilt from 'react-parallax-tilt';
 const ImageSlider = ({ images }) => {
+  const navigate = useNavigate() ;
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1024 },
@@ -26,8 +29,14 @@ const ImageSlider = ({ images }) => {
     },
   };
 
+  
+
   return (
-    <div className="relative mb-10 max-w-[550px] md:max-w-[650px] lg:max-w-[750px]  p-4 mx-auto rounded-lg">
+    <div onClick={
+      () => {
+        navigate('/about')
+      }
+    } className="relative mb-10 max-w-[550px] md:max-w-[650px] lg:max-w-[750px]  p-4 mx-auto rounded-lg">
      
         
 
@@ -42,8 +51,9 @@ const ImageSlider = ({ images }) => {
         
         
  {images.map((image, index) => (
-  <SwiperSlide key={index}>
+  <SwiperSlide  key={index}>
     <div 
+   
       key={index} 
       className="flex h-full items-center space-x-4 p-4 shadow-lg rounded-lg border border-gray-200 
                  transition-all duration-300 hover:shadow-xl hover:border-gray-300"

@@ -4,7 +4,7 @@ const SliderData = [
     id: 1,
     name: "Ashif Pathan",
     job: "Founder",
-    image: "https://media.licdn.com/dms/image/v2/D5603AQGQVvx5ic6SFA/profile-displayphoto-shrink_400_400/B56ZVB_vk4GsAg-/0/1740568985338?e=1746057600&v=beta&t=Qm34m9YBFWwq4ErfZ02-MiO0GwvyLPhVvr4NlfzqHWY",
+    image: "https://media.licdn.com/dms/image/v2/D5603AQGQVvx5ic6SFA/profile-displayphoto-shrink_200_200/B56ZVB_vk4GsAY-/0/1740568985324?e=1746057600&v=beta&t=y9zR2OwTwprkaq0ANWKq2MSBtksYbMlM1uK38B_83mk",
     width: 20,
     text: "As the founder, I am committed to driving our company's growth and success through innovation, dedication, and a relentless pursuit of excellence.",
   },
@@ -20,7 +20,7 @@ const SliderData = [
     id: 3 ,
     name: 'Balram Meena',
     job: 'Java Developer',
-    image: 'https://media.licdn.com/dms/image/v2/D4E03AQEbD2_0jRmNAA/profile-displayphoto-shrink_100_100/B4EZVHdUisHcAU-/0/1740660625642?e=2147483647&v=beta&t=cXD01gbX28kyKCFPt9HVEIVB4K50zFDpbjcaIb6N8Ks',
+    image: 'https://media.licdn.com/dms/image/v2/D4E03AQHopM--GapLaA/profile-displayphoto-shrink_100_100/B4EZVfHIvrH0AU-/0/1741057463149?e=2147483647&v=beta&t=3dsMsh5X4VwMsVLk6zAZ2N0khxWiQCSwaYaKfOqQlno',
     alt:'Image 3',
     width: 20,
     text: 'I am a dedicated Java Developer , I give my best to this company '
@@ -29,7 +29,7 @@ const SliderData = [
     id: 4 ,
     name: 'Yash Nayak',
     job: 'App Developer',
-    image: 'https://media.licdn.com/dms/image/v2/D5603AQEZOCansLtrDQ/profile-displayphoto-shrink_100_100/B56ZVG2kvoGQAY-/0/1740650470934?e=2147483647&v=beta&t=dLAYju9pHPjKRNnU8-c2Yfe-qpfq_A8ChX_fSFt3jRA',
+    image: 'https://media.licdn.com/dms/image/v2/D5603AQG7aFoOJNXHaw/profile-displayphoto-shrink_400_400/B56ZY0OUr9GoAg-/0/1744632894862?e=2147483647&v=beta&t=wIAtllmSQZOfRVKkVnznuF4Fc1S0FPxzKgzGGVPaNWo',
     alt:'Image 4',
     width: 20,
     text: 'I am a dedicated App Developer , I give my best to this company '
