@@ -7,7 +7,13 @@ import toast from 'react-hot-toast'
 import {completeLecture} from '../services/operations/coursesApi.js'
 import '../index.css'
 const Task = () => {
-    
+
+  function convertSecondsToMinutes(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}m ${secs}s`;
+  }
+  
 
     const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch()
@@ -23,6 +29,19 @@ const Task = () => {
    const [questionIndex , setQuestionIndex]  = useState(0) ;
 const [choose , setChoose] = useState('')
 const [submitted , setSubmitted ] = useState(false)
+
+
+
+
+const toggleSection = (index) => {
+  setOpenSections((prev) => ({
+    ...prev,
+    [index]: !prev[index],
+  }));
+};
+
+const [compl , setCompl] = useState(true) ;
+
 
 
 const token = localStorage.getItem('token') ;
@@ -65,12 +84,15 @@ const next = async() =>{
 
 }
 
+const [selectedCourse , setSelectedCourse] = useState({})
+
 useEffect(()=> {
 
 
     setLoading(true)  ;
   
    const course =  courses.filter((course) => course._id === id)[0] ;
+   setSelectedCourse(course)
    const compSubsec = user.courseProgress.filter((coursePro) => coursePro.courseID === id)[0]?.completedVideos
    const index =  compSubsec?.length ;
    let complete = compSubsec?.length ;
@@ -88,16 +110,34 @@ useEffect(()=> {
             // console.log(complete)
         }
     }
+    
+    const defaultSectionName = course?.courseContent[0]?.sectionName
+    const defaultSubSection = course?.courseContent[0]?.subSection[0]
 
-    setSectionName(section?.sectionName || '');
-    setSubSection(subSection || {});
-  setQuestions(subSection?.questions || [])
+    if(subSection){
+      setCompl(false)
+    }
+    setSectionName(section?.sectionName || defaultSectionName);
+    setSubSection(subSection || defaultSubSection);
+  setQuestions(subSection?.questions || defaultSubSection?.questions)
    setLoading(false)
 
 
 } , [])
 
-// console.log(subSection)
+
+const [openSections, setOpenSections] = useState({}) ;
+
+useEffect(() => {
+  if (selectedCourse?.courseContent) {
+    const initialState = {};
+    selectedCourse.courseContent.forEach((_, index) => {
+      initialState[index] = true;
+    });
+    setOpenSections(initialState);
+  }
+}, [selectedCourse]);
+
 function convertYouTubeURL(url) {
   let videoID, startTime = "", endTime = "";
 
@@ -123,6 +163,7 @@ function convertYouTubeURL(url) {
 const videoUrl = convertYouTubeURL(subSection?.videoUrl) ;
 
 
+
    if(loading){
     return (
     <div className='w-screen h-screen flex justify-center items-center'>
@@ -132,13 +173,18 @@ const videoUrl = convertYouTubeURL(subSection?.videoUrl) ;
   
    }
 
-   if(!sectionName){
-    return (
-    <div className='min-h-screen relative flex justify-center items-center font-bold text-xl '>
-      <button onClick={() => navigate('/courses')} className='absolute top-2 left-2 '>Go to Courses</button>
-      Coming Soon...
-    </div>)
+
+  const changeSubsection = (subsect) => {
+    const compSubsec = user.courseProgress.find((coursePro) => coursePro.courseID === id)?.completedVideos || [];
+
+const isCompleted = compSubsec.some((section) => section.subSection._id === subsect._id);
+setCompl(isCompleted);
+
+    setSubSection(subsect)
+    setQuestions(subsect?.questions)
    }
+
+  
   return (
     <div>
       <Navbar/> 
@@ -187,50 +233,136 @@ const videoUrl = convertYouTubeURL(subSection?.videoUrl) ;
 
 </div> :
 
-      
-      <div className='pt-20 flex flex-col  min-h-screen'>
-            <div className='w-full flex justify-center items-center font-bold uppercase text-2xl'>
-              <h2>{sectionName}</h2>
-            </div>
-     
-            <div className='p-4 px-6 flex flex-col gap-5  '>
-              <h3 className='font-semibold w-full text-center text-xl capitalize '>{subSection?.title}</h3>
 
-            <div className='w-full flex justify-center items-center p-3 mt-5 '>
-            <iframe 
-  className="w-full aspect-video rounded-lg shadow-lg"
+<div className='pt-20 flex flex-col md:flex-row lg:flex-row gap-10 p-4  w-full justify-between min-h-screen' >
+
+                       {/* video element */}
+                       <div className=' w-full flex flex-col  min-h-screen'>
+
+
+                 
+                  
+                  <div className='p-4 px-6 flex flex-col gap-5  '>
+  <h3 className='font-semibold w-full text-slate-400 text-lg capitalize '>{ selectedCourse?.courseName?.slice(0, 10) + '...>'  + sectionName + ">" + subSection?.title?.slice(0, 10) + ".."}</h3>
+
+                  <div className='w-full flex justify-center items-center p-3 mt-5 '>
+                  <iframe 
+ className="w-full aspect-video rounded-lg shadow-lg"
 
   src={videoUrl}
-  title="YouTube video player"
-  frameBorder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen"
+   title="YouTube video player"
+    frameBorder="0"
+ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen"
   allowFullScreen
-></iframe>
-</div>
-             <div className='w-full p-3  '>
-              <p className='text-center font-bold text-lg pb-3'>SUMMARY</p>
-              <div className='max-w-[600px]  md:max-w-[750px] lg:max-w-[850px] mx-auto mt-3'>
-              <textarea   style={{ height: `${Math.min(450, Math.max(200, subSection?.description?.length ))}px` }}
-                className="w-full p-2 resize-none h-full  rounded-lg"
-                value={subSection?.description}
-                readOnly
-              />
-              </div>
-           
-             </div>
-          
-          <div className='w-full flex justify-center'>
-          <button onClick={() =>subSection?.questions?.length > 0 ? setQuestionModal(true) : next()} className='mt-10 bg-blue-500 text-white font-semibold rounded-xl p-3 block px-8 '>
-            {subSection?.questions?.length > 0 ? "Practice Questions": "Complete"}
-          </button>
-          </div>
-       
+ ></iframe>
+                  </div>
+                   <div className='w-full p-3  '>
+                   <p className='text-center capitalize font-bold text-lg pb-3'>{subSection?.title}</p>
+                   <div className='max-w-[600px]  md:max-w-[750px] lg:max-w-[850px] mx-auto mt-3'>
+                   <textarea   style={{ height: `${Math.min(450, Math.max(200, subSection?.description?.length ))}px` }}
+                     className="w-full capitalize p-2 resize-none h-full  rounded-lg"
+                     value={subSection?.description}
+                     readOnly
+                   />
+                   </div>
 
-            </div>
+                   </div>
+                  
+                  <div className='w-full flex justify-center'>
+                  {!compl && <button onClick={() =>subSection?.questions?.length > 0 ? setQuestionModal(true) : next()} className='mt-10 bg-blue-500 text-white font-semibold rounded-xl p-3 block px-8 '>
+                  {  subSection?.questions?.length > 0 ? "Practice Questions": "Complete"}
+                  </button>}
+                  </div>
+
+
+                  </div>
+
+
+
+
+                  </div>
+
+{/* right area  */}
+     
+     <div  className='p-4 px-6 flex gap-4 flex-col bg-gray-400 text-slate-950  rounded-lg md:w-[45%] lg:w-[45%]  w-full   h-full py-10 self-start ' >
+     
+     
+      <div className='text-xl  font-semibold '>
+         {selectedCourse?.courseName}
       </div>
+
+     <div className='w-full bg gap-3 flex flex-col  h-full '>
+       {
+        selectedCourse?.courseContent?.map((section , index) => {
+
+           
+  
+
+          return (  <div className='relative w-full bg-white rounded-lg p-4 ' key={index}>
+
+           <h2 className=' uppercase font-semibold '>{section?.sectionName}</h2>
+          
+           <button
+  onClick={() => toggleSection(index)}
+  className={`absolute right-0 top-0 p-4 text-2xl font-bold transition-all  ${openSections[index] ? 'rotate-180' : 'rotate-0'} duration-300`}
+>
+  <i className={`ri-arrow-down-double-line transition-transform duration-300 `}></i>
+</button>
+
+
+
+            <p className=' text-sm text-slate-600  '>{section?.subSection?.length > 0 ? section?.subSection?.length + " Lesson" : "" }</p>
+             {openSections[index] &&  
+              
+                (section?.subSection?.length > 0 ?
+                 
+                <div onClick={() => {
+                  setSectionName(section?.sectionName)
+                 }} className='px-2  shadow-xl mt-2 py-1 rounded-lg  flex flex-col gap-2 '>
+{
+                section?.subSection?.map((subsect , index) => {
+                  return (
+                    <div onClick={() => {
+                     changeSubsection(subsect) ;
+                    }} className={`capitalize flex ${subSection._id === subsect._id ? " bg-slate-200" : 'hover:bg-slate-100'}   transition-all duration-200 `}   key={index}>
+                   <button className='p-2 '>
+                   <i class="font-bold text-xl ri-play-mini-line"></i>
+                   </button>
+                   
+                   <div className='w-full text-md'>
+                   <h3 className=''>{" " + subsect?.title}</h3>
+                   <p className='px-1 text-slate-500 text-sm '>{convertSecondsToMinutes(subsect?.timeDuration)}</p>
+                   </div>
+                     
+                    </div>
+                  )
+                })}
+                </div>
+                
+                :
+                <p>Comming Soon ..</p>
+               )
+             }
+               
+          </div>)
+        })
+       }
+     </div>
+
+
+     </div>
+
+</div>
 }
+
+</div>
+
+
+
+
+
       
-    </div>
+     
   )
 }
 
