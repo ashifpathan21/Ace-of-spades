@@ -45,7 +45,7 @@ const InstructorProtectedWrapper = ({ children }) => {
 
     // checking that the user is instructor or not 
     const [isLoading , setIsLoading] = useState(true) ;
-    axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/profile/getUserDetails` , {
+    axios.get(`${import.meta.env.VITE_BASE_URL}/profile/getUserDetails` , {
         headers:{
             Authorization:`Bearer ${token}`
         }

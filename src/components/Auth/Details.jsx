@@ -59,7 +59,7 @@ const Details = (props) => {
     setUserLoading(true)
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/username`, { userName: userName });
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/username`, { userName: userName });
       setUserLoading(false)
       if (response.data.success) {
         setUserNameStatus('available');

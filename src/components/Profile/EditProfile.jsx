@@ -120,7 +120,7 @@ const EditProfile = (props) => {
     setLoading(true)
 
     try {
-      const response = await axios.post(`${api}/api/v1/auth/username`, { userName: userName });
+      const response = await axios.post(`${api}/auth/username`, { userName: userName });
       setLoading(false)
       if (response.data.success) {
         setUserNameStatus('available');
