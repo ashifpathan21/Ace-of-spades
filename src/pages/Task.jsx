@@ -44,10 +44,12 @@ toast('Correct!', {
   // console.log(submitted)
 }
 
+const [disable , setDisable] = useState(false)
 
 const next = async() =>{
   if(questions.length === questionIndex+1 ){
     try {
+      setDisable(true)
       const responce = await dispatch(completeLecture({courseId:id , subsectionId:subSection._id , correctQuestions} , token))
     if(responce) {
       toast.success('Task Completed') ;
@@ -55,6 +57,7 @@ const next = async() =>{
     } catch (error) {
       toast.error(error.message) ;
     }
+    setDisable(false)
   }else{
     setQuestionIndex(questionIndex+1) ;
     setSubmitted(false)
@@ -177,7 +180,7 @@ const videoUrl = convertYouTubeURL(subSection?.videoUrl) ;
 
 <div className='w-full flex flex-col items-center justify-center'>
 <button className='bg-green-400 text-white px-5 p-3 mt-4 shodow-sm shadow-slate-600 rounded-lg  ' disabled={submitted} onClick={match}>{submitted ?"Submitted" :"Submit"}</button>
-{submitted && <button className='bg-green-400 text-white px-5 p-3 mt-4 shodow-sm shadow-slate-600 rounded-lg  '  onClick={next}>Next</button>}
+{submitted && <button className='bg-green-400 text-white px-5 p-3 mt-4 shodow-sm shadow-slate-600 rounded-lg  '  disabled={disable}  onClick={next}>Next</button>}
 </div>
 
 
