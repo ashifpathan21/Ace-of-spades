@@ -187,10 +187,10 @@ setCompl(isCompleted);
 
   
   return (
-    <div>
+    <div className=''>
       <Navbar/> 
 { questionModal ?
- <div className='pt-20 p-3 flex flex-col gap-5'>
+ <div className='pt-20  p-3 flex flex-col gap-5'>
 <h2 className='text-center font-semibold text-lg'>Questions</h2>
 
 <div className='capitalize px-4 text-lg'>
@@ -353,10 +353,16 @@ setCompl(isCompleted);
 
      </div>
 
+
+
 </div>
 }
 
-<Footer/>
+
+{
+  !questionModal && <Footer/>
+}
+
 </div>
 
 
