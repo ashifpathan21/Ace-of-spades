@@ -176,7 +176,7 @@ const messageBoxRef = useRef(null);
 
 
          { help ?   //ai chat 
-            <div  className='fixed  h-[80%] w-70 border transition-all  duration-500 shadow-md   bottom-0 mb-3  right-5 flex gap-3 flex-col p-2  justify-start  items-center   rounded-lg '>
+            <div  className='fixed text-black  h-[80%] w-70 border transition-all  duration-500 shadow-md   bottom-0 mb-3  right-5 flex gap-3 flex-col p-2  justify-start  items-center   rounded-lg '>
                 <div className='bg-white w-full flex '>
                     <button className='p-2 font-bold' onClick={() => {
                         setHelp(false)
