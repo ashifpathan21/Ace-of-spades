@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import {useSelector , useDispatch} from 'react-redux'
 import toast from 'react-hot-toast'
 import {completeLecture} from '../services/operations/coursesApi.js'
+import Footer from '../components/Basic/Footer.jsx'
 import '../index.css'
 const Task = () => {
 
@@ -355,6 +356,7 @@ setCompl(isCompleted);
 </div>
 }
 
+<Footer/>
 </div>
 
 
@@ -364,6 +366,8 @@ setCompl(isCompleted);
       
      
   )
+
+
 }
 
 export default Task
