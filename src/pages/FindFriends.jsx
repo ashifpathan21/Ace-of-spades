@@ -24,9 +24,9 @@ const [userName , setUserName] = useState('')
     const findFriends = async (userName) => {
   setLoading(true)
       try {
-      console.log(user)
+  
        const Friend = await dispatch(findFriend({userName} , token)) ;
-       console.log(Friend)
+      
        const exceptUser = Friend.filter((friend ) => {friend._id != user._id }) ;
        const filteredUsers = exceptUser.filter(
         (u) => !user.friends.some(friendId => friendId.toString() === u._id.toString())
@@ -34,7 +34,7 @@ const [userName , setUserName] = useState('')
       const Friends = Friend.filter((u) =>
         user.friends.includes(u._id)
       );
-      console.log(Friends)
+    
       setAlreadyFriend(Friends)
        setFriends(filteredUsers)
 
