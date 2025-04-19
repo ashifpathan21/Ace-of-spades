@@ -83,7 +83,7 @@ const Navbar = () => {
 
   return (
     <div>
-       <div className={`transition bg-transparent ${showNavbar ? "translate-y-0" : "-translate-y-full"} backdrop-blur-sm z-10 w-screen fixed top-0 duration-500`}>
+       <div className={`transition bg-transparent ${showNavbar ? "translate-y-0" : "-translate-y-full"} backdrop-blur-sm z-10  w-screen fixed top-0 duration-500`}>
       <div className='lg:max-w-[1080px] md:max-w-[900px] max-w-[600px] w-full mx-auto flex justify-between px-3 h-20'>
         <div 
           onClick={() => { navigate('/') }} 

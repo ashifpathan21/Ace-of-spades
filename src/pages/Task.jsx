@@ -285,7 +285,7 @@ setCompl(isCompleted);
 
 {/* right area  */}
      
-     <div  className='p-4 px-6 flex gap-4 flex-col bg-gray-400 text-slate-950  rounded-lg md:w-[45%] lg:w-[45%]  w-full   h-full py-10 self-start ' >
+     <div  className='p-4 px-6 flex gap-4 flex-col backdrop-blur-4xl   shadow-md shadow-emerald-200   rounded-lg md:w-[45%] lg:w-[45%]  w-full   h-full py-10 self-start ' >
      
      
       <div className='text-xl  font-semibold '>
@@ -299,7 +299,7 @@ setCompl(isCompleted);
            
   
 
-          return (  <div className='relative w-full bg-white rounded-lg p-4 ' key={index}>
+          return (  <div className='relative w-full backdrop-blur-5xl   shadow-md shadow-cyan-200 rounded-lg p-4 ' key={index}>
 
            <h2 className=' uppercase font-semibold '>{section?.sectionName}</h2>
           
@@ -319,13 +319,13 @@ setCompl(isCompleted);
                  
                 <div onClick={() => {
                   setSectionName(section?.sectionName)
-                 }} className='px-2  shadow-xl mt-2 py-1 rounded-lg  flex flex-col gap-2 '>
+                 }} className='  shadow-xl mt-2  rounded-lg  flex flex-col gap-2 '>
 {
                 section?.subSection?.map((subsect , index) => {
                   return (
                     <div onClick={() => {
                      changeSubsection(subsect) ;
-                    }} className={`capitalize flex ${subSection._id === subsect._id ? " bg-slate-200" : 'hover:bg-slate-100'}   transition-all duration-200 `}   key={index}>
+                    }} className={`capitalize flex p-2 rounded-lg shadow-fuchsia-200 shadow ${subSection._id === subsect._id ? " bg-cyan-400 " : 'hover:bg-cyan-300'}   transition-all duration-200 `}   key={index}>
                    <button className='p-2 '>
                    <i class="font-bold text-xl ri-play-mini-line"></i>
                    </button>
