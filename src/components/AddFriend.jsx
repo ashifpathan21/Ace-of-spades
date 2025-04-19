@@ -38,10 +38,10 @@ const AddFriend = (props) => {
     }
 
   return (
-    <div className={`w-full px-4  items-center  bg-white text-black shadow-black shadow-sm hover:shadow-md transition-all duration-500 rounded-lg p-3 justify-around flex`} >
+    <div className={`w-full px-4  items-center backdrop-blur-3xl shadow-cyan-300 shadow-sm hover:shadow-md transition-all duration-500 rounded-lg p-3 justify-around flex`} >
     <img 
     src={friend?.image}  
-     className="object-cover aspect-square rounded-full border-4 border-gray-300 w-20"
+     className="object-cover aspect-square rounded-full  shadow-emerald-400 w-20"
      />
      <div className='flex flex-col md:flex-row gap-3  lg:flex-row items-center justify-around w-[90%]'>
      <div className="text-center flex flex-col gap-1 sm:text-left">
