@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux'
 import {toast } from 'react-hot-toast'
 import '../index.css';
 const AddFriend = (props) => {
-    const {friend , user }  = props ;
+    const {friend , user , isAdded }  = props ;
     const dispatch = useDispatch()
     const [sent , setSent] = useState(false)
     const token = localStorage.getItem('token')
@@ -51,12 +51,14 @@ const AddFriend = (props) => {
      </div>
 
      {
-      loading ? <span className='loader'>Sending</span> :
-      <Tilt glareEnable={true} glareMaxOpacity={0.6} glareColor="lightblue" glarePosition="all" glareBorderRadius="40px" >
+      loading ? <span className='loader'></span> :
+        !isAdded &&  <Tilt glareEnable={true} glareMaxOpacity={0.6} glareColor="lightblue" glarePosition="all" glareBorderRadius="40px" >
            <button onClick={() => {
             send()
            }} disabled={sent} className='bg-[#4bffe4] rounded-xl  px-3  inline  py-2  text-gray-600 lg:font-semibold md:font-semibold hover:bg-[#a2f5e9] '>{sent ? 'Request Sent' : <><i className="ri-user-add-fill"></i>Add Friend </>}</button>
-       </Tilt>}
+       </Tilt>
+       
+       }
      </div>
   
 

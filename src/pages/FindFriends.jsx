@@ -17,17 +17,26 @@ const FindFriends = () => {
   const dispatch = useDispatch() ;
   const [friends , setFriends] = useState([])
   const token = localStorage.getItem('token')
-
+  const [alreadyFriend , setAlreadyFriend ] = useState([])
 const [loading , setLoading] = useState(false) ;
 const [userName , setUserName] = useState('')
 
     const findFriends = async (userName) => {
   setLoading(true)
       try {
-      
+      console.log(user)
        const Friend = await dispatch(findFriend({userName} , token)) ;
-       const result = Friend.filter((friend ) => friend._id != user._id) ;
-       setFriends(result)
+       console.log(Friend)
+       const exceptUser = Friend.filter((friend ) => {friend._id != user._id }) ;
+       const filteredUsers = exceptUser.filter(
+        (u) => !user.friends.some(friendId => friendId.toString() === u._id.toString())
+      );
+      const Friends = Friend.filter((u) =>
+        user.friends.includes(u._id)
+      );
+      console.log(Friends)
+      setAlreadyFriend(Friends)
+       setFriends(filteredUsers)
 
       } catch (error) {
         
@@ -85,7 +94,12 @@ const [userName , setUserName] = useState('')
          {
           loading ? <div className='w-full gap-3 mb-10 flex justify-center items-center'>
             <span className='loader'></span>
-          </div> : friends?.length > 0 ? friends.map((friend , i ) => <AddFriend key={i} user={user} friend={friend} />) : <div  className='w-full h-90 flex justify-center items-center'>
+          </div> : friends?.length > 0 || alreadyFriend?.length > 0 ? <>
+          { 
+          alreadyFriend.map((friend , i ) => <AddFriend key={i} isAdded={true} user={user} friend={friend} />)
+           } {
+          friends.map((friend , i ) => <AddFriend key={i} isAdded={false} user={user} friend={friend} />)}
+          </> : <div  className='w-full h-90 flex justify-center items-center'>
             <p  className='text-center text-lg'>
               No User Found !
             </p>
