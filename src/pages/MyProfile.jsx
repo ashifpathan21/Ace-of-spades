@@ -73,7 +73,7 @@ const MyProfile = () => {
                          
                        <h2 className='p-4 text-center font-bold shadow rounded-lg  shadow-emerald-100 text-xl '>Friend Requests</h2>  
 
-                       <div className='flex flex-col p-2 px-1  rounded-lg pb-20 overflow-scroll min-h-[40%] gap-3 '>
+                       <div className='flex flex-col p-2 px-1  rounded-lg pb-20 overflow-y-scroll min-h-[40%] gap-3 '>
                         { loading ? <span className='loader'></span>  :
                             user?.friendRequest?.map((friend) => {
                               return <FriendRequest friend={friend} setLoading={setLoading} />
