@@ -200,7 +200,7 @@ const EditProfile = (props) => {
         <form onSubmit={update} className=' p-5 md:p-8 lg:p-10 max-w-[800px] mx-auto mb-10  w-full relative min-h-screen '>
           {/* Profile image */}
           <div className="w-full mb-3 flex justify-center  items-center">
-            <div className="rounded-full relative flex justify-center items-center bg-amber-100 h-30 w-30">
+            <div className="rounded-full relative flex justify-center items-center backdrop-blur-3xl shadow shadow-cyan-300 h-30 w-30">
               <img src={img} alt="Profile" className="rounded-full object-cover aspect-square h-29 w-29" />
               <i
                 onClick={onButtonClick}

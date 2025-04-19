@@ -243,10 +243,10 @@ setCompl(isCompleted);
 
                  
                   
-                  <div className='p-4 px-6 flex flex-col gap-5  '>
+                  <div className='p-4 px-2 flex flex-col gap-5  '>
   <h3 className='font-semibold w-full text-slate-400 text-lg capitalize '>{ selectedCourse?.courseName?.slice(0, 10) + '...>'  + sectionName + ">" + subSection?.title?.slice(0, 10) + ".."}</h3>
 
-                  <div className='w-full flex justify-center items-center p-3 mt-5 '>
+                  <div className='w-full flex justify-center items-center  mt-5 '>
                   <iframe 
  className="w-full aspect-video rounded-lg shadow-lg"
 

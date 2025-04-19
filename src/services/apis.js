@@ -10,6 +10,8 @@ export const endpoints = {
   CHECK_USERNAME: BASE_URL + '/auth/username',
   FIND_FRIEND: BASE_URL + '/auth/find-friend',
   SEND_REQUEST: BASE_URL + '/auth/add-friend',
+  ACCEPT_REQUEST: BASE_URL + '/auth/accept-friend-request',
+  REJECT_REQUEST: BASE_URL + '/auth/reject-friend-request',
   GET_REVIEW: BASE_URL + '/auth/support'
 }
 

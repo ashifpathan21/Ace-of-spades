@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "../components/Basic/Navbar.jsx";
 import '../index.css'
+import FriendRequest from "../components/FriendRequest";
 import Modals from "../components/Basic/Modals.jsx";
 import CourseProgress from "../components/Profile/CourseProgress.jsx";
 import Tilt from 'react-parallax-tilt';
@@ -11,6 +12,7 @@ const MyProfile = () => {
 
     const { user } = useSelector((state) => state.user);
  
+    const [friendRequestModal , setFriendRequestModal] = useState(false)
     const [progress, setProgress] = useState(90);
     const [editModal, setEditModal] = useState(false);
     const [isLoading, setIsLoading] = useState(true); // Add loading state
@@ -18,7 +20,9 @@ const MyProfile = () => {
     const [questionAttempted , setQuestionAttempted] = useState('')
     let completedQuestions = 0 ;
     let questionAttempt =  0 ;
-
+ 
+    const [loading , setLoading ] = useState(false)  ;
+  
 
     useEffect(() => {
         if (user) {
@@ -43,8 +47,11 @@ const MyProfile = () => {
     }, [user]);
 
     if (isLoading) {
-        return <div>Loading...</div>; // Or a more sophisticated loading indicator
+        return <div><span className='loader'></span></div>; // Or a more sophisticated loading indicator
     }
+
+ 
+
 
     const { firstName, lastName, userName, image , courses} = user || {}; // Destructure user properties
 
@@ -55,12 +62,31 @@ const MyProfile = () => {
         <div className='relative min-h-screen'>
             <Navbar />
             {/* Edit Profile Modal */}
-            <div className={`${editModal ? 'block' : 'hidden'} h-screen w-screen overflow-y-auto absolute top-0 z-10 backdrop-blur-lg`}>
+            <div className={`${friendRequestModal ? 'block' : 'hidden'} h-screen w-screen overflow-y-auto absolute top-0 z-10 backdrop-blur-lg`}>
                
-                <div className='w-full h-20'>
-                    <h2 className='w-full p-2 text-center mb-2 text-3xl font-semibold'>
-                        <span><i className="ri-pencil-fill"></i></span> Edit Profile
-                    </h2>
+                <div className='absolute top-0 p-8 flex justify-center items-center min-h-full  w-full h-full z-10  '>
+                <div onClick={() => setFriendRequestModal(false)} className=' min-h-full absolute z-10 right-10 top-3 text-2xl rounded-lg'>
+                    <i className="ri-close-large-fill"></i>
+                </div>
+                   
+                   <div className='w-full   p-4 flex flex-col gap-3 rounded-lg shadow shadow-cyan-200'>
+                         
+                       <h2 className='p-4 text-center font-bold shadow rounded-lg  shadow-emerald-100 text-xl '>Friend Requests</h2>  
+
+                       <div className='flex flex-col p-2 px-1  rounded-lg pb-20 overflow-scroll min-h-[40%] gap-3 '>
+                        { loading ? <span className='loader'></span>  :
+                            user?.friendRequest?.map((friend) => {
+                              return <FriendRequest friend={friend} setLoading={setLoading} />
+                            })
+                        }
+                        {
+                            user?.friendRequest?.length <= 0 && <p>No Request !!</p>
+                        }
+                       </div>
+
+                   </div>
+                
+
                 </div>
                 
 
@@ -81,16 +107,19 @@ const MyProfile = () => {
                             <p className='capitalize '>{user?.additionalDetails?.about}</p>
                            {user?.additionalDetails?.linkedinUrl &&  <a className='text-blue-300' target="_blank"  rel="noopener noreferrer" href={`https://${user?.additionalDetails?.linkedinUrl}`}>Linkedin</a>}
                             <div className='flex gap-3 flex-col md:flex-row lg:flex-row'>
-                                <Tilt glareEnable={true} glareMaxOpacity={0.6} glareColor="lightblue" glarePosition="all" glareBorderRadius="40px">
-                                    <button className='bg-[#4bffe4] rounded-xl w-full px-3 p-1 md:p-2 lg:p-3 text-gray-600 lg:font-semibold md:font-semibold hover:bg-[#a2f5e9]'>
+                               
+                                       <button onClick={() => {
+                                       
+                                        setFriendRequestModal(true)}}
+                                     className='bg-[#4bffe4] rounded-xl w-full px-3 p-1 relative md:p-2 lg:p-3 text-gray-600 lg:font-semibold md:font-semibold hover:bg-[#a2f5e9]'>
                                         <i className="ri-user-add-fill"></i> Friend Request
+                                   {user?.friendRequest?.length > 0 &&     <div className='absolute -top-1 h-5 backdrop-blur-3xl border-cyan-500 shadow-md  border flex justify-center items-center animate-bounce shadow-cyan-400  right-0  w-5 rounded-full  '>{user?.friendRequest?.length}</div>}
                                     </button>
-                                </Tilt>
-                                <Tilt glareEnable={true} glareMaxOpacity={0.6} glareColor="lightblue" glarePosition="all" glareBorderRadius="40px">
-                                    <button onClick={() => setEditModal(true)} className='bg-[#4bffe4] rounded-xl w-full px-3 p-1 md:p-2 lg:p-3 text-gray-600 lg:font-semibold md:font-semibold hover:bg-[#a2f5e9]'>
+                              
+                                   <button onClick={() => setEditModal(true)} className='bg-[#4bffe4] rounded-xl w-full px-3 p-1 md:p-2 lg:p-3 text-gray-600 lg:font-semibold md:font-semibold hover:bg-[#a2f5e9]'>
                                         <i className="ri-pencil-fill"></i> Edit Profile
                                     </button>
-                                </Tilt>
+                               
                             </div>
                         </div>
                     </div>
