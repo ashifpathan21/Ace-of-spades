@@ -44,8 +44,8 @@ return (
                
 
                
-                return  <div key={index} className='pb-2 bg-white rounded-lg '> <div className='w-full text-black  bg-white  shadow-lg rounded-lg p-4  border border-gray-200 
-                transition-all duration-300 hover:shadow-xl hover:border-gray-300'> 
+                return  <div key={index} className='pb-2 rounded-lg '> <div className='w-full rounded-lg p-4  border border-gray-200 
+                transition-all duration-300  shadow shadow-cyan-300 hover:shadow-md'> 
                     <h2 className='text-xl font-semibold'>{course?.courseName}</h2>
                     <p className='text-lg'>{course?.studentsEnrolled?.length} students</p>
                 </div> </div>

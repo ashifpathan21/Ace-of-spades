@@ -4,9 +4,16 @@ import {createSectionn , deleteSectionn , updateSection , updateSubSection , get
 import {useSelector , useDispatch} from 'react-redux'
 import QuestionForm from './QuestionForm'
 import {getInstructorCourses} from '../../services/operations/instructorApi'
+import {  } from "../../index.css";
 const SectionForm = (props) => {
 
 
+
+  const [isLoading , setIsLoading ] = useState(false)
+
+  if(isLoading){
+    return <div><span className='loader'></span></div>
+  }
   const {courses} = useSelector((state)=> state.instructorCourses)
   const {course} = useSelector((state) => state.createCourse)
 
@@ -140,14 +147,14 @@ async function subSec() {
   setWaiting(true)
   try {
     const payload = await dispatch(createSubSection({sectionId , title , description , videoUrl } , token )) ;
-    // console.log(payload)
-    let subS =  payload.subSection ;
-    // console.log(subS)
-      let index = subS.length -1 ;
-      // console.log(index)
+   //  console.log(payload)
+    let subS =  payload?.subSection ;
+   //  console.log(subS)
+      let index = subS?.length -1 ;
+    // console.log(index)
     setSubsectionId(subS[index]._id);
   } catch (error) {
-    // console.log(error)
+   console.log(error)
     toast.error('Something Went Wrong ')
   }
   setWaiting(false)
@@ -167,7 +174,7 @@ function updateSub(e){
       setQuestionModal(true)
      
     } catch (error) {
-      // console.log(error)
+      console.log(error)
     }
     setWaiting(false)
   }
@@ -352,7 +359,7 @@ function updateSub(e){
                 setSectionId(section._id)
               }}>
               
-             <div className='flex bg-white p-3 rounded-lg py-4 text-black justify-between w-full'>
+             <div className='flex p-3 rounded-lg py-4 backdrop-blur-3xl shadow  shadow-cyan-300 justify-between w-full'>
 
                 <h2 className='text-xl uppercase '>{section.sectionName}</h2>
                 <div className='px-3 flex gap-3 '>
@@ -382,11 +389,11 @@ function updateSub(e){
                  }} > <i className=" text-xl font-semibold ri-add-large-line"></i></button>
                 </div>
             </div>
-            <div className='flex flex-col gap-2 w-full bg-white pb-4 -mt-1 rounded-lg '>
+            <div className='flex flex-col gap-2 w-full backdrop-blur-3xl shadow shadow-cyan-300 pb-4 -mt-1 rounded-lg '>
           
                 {
                   section?.subSection?.map((subSect , index)=> {
-                    return <div key={index} className='px-7 flex justify-between bg-white text-black  ' >
+                    return <div key={index} className='px-7 py-2 flex justify-between items-center backdrop-blur-4xl shadow  shadow-cyan-200  ' >
                     <h2>{subSect.title}</h2>
 
        <div className='flex gap-4 p-1 '>

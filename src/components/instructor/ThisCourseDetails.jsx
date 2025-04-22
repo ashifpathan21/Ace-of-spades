@@ -22,8 +22,8 @@ const ThisCourseDetails = (props) => {
       <div className='w-full h-full  flex justify-center items-center ' >
      <ThisCoursePie data={data} />
       </div>
-     <div className=' w-[70%] h-full pb-2 my-auto text-black  bg-white  rounded-lg '>
-     <div className=' p-3 bg-white  px-5 rounded-lg justify-center border-b shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105  flex flex-col gap-4 w-full   '>
+     <div className=' w-[70%] h-full pb-2 my-auto  rounded-lg '>
+     <div className=' p-3  px-5 rounded-lg justify-center  shadow shadow-cyan-300 hover:shadow-md border-b  transition-all duration-500 hover:scale-105  flex flex-col gap-4 w-full   '>
           <h2 className=' font-semibold text-xl  '>{course?.courseName}</h2>
         <p>Total Sections {course?.courseContent?.length}</p>
         <p>Total SubSections {total }</p>

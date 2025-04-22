@@ -1,5 +1,6 @@
 import React , {useState , useEffect}from 'react'
 import Tilt from 'react-parallax-tilt';
+import { useNavigate } from "react-router-dom";
 import {sendRequest} from '../services/operations/friendApi.js'
 import {useDispatch} from 'react-redux'
 import {toast } from 'react-hot-toast'
@@ -10,6 +11,7 @@ const AddFriend = (props) => {
     const [sent , setSent] = useState(false)
     const token = localStorage.getItem('token')
 
+    const navigate = useNavigate() ;
 
     useEffect(() => {
      
@@ -38,12 +40,16 @@ const AddFriend = (props) => {
     }
 
   return (
-    <div className={`w-full px-4  items-center backdrop-blur-3xl shadow-cyan-300 shadow-sm hover:shadow-md transition-all duration-500 rounded-lg p-3 justify-around flex`} >
-    <img 
+    <div  className={`w-full px-4  items-center backdrop-blur-3xl shadow-cyan-300 shadow-sm hover:shadow-md transition-all duration-500 rounded-lg p-3 justify-around flex`} >
+    <img onClick={() => {
+      navigate(`/user/${friend?.userName}` , {state:{ user:friend}})
+     }} 
     src={friend?.image}  
      className="object-cover aspect-square rounded-full  shadow-emerald-400 w-20"
      />
-     <div className='flex flex-col md:flex-row gap-3  lg:flex-row items-center justify-around w-[90%]'>
+     <div onClick={() => {
+      navigate(`/user/${friend?.userName}` , {state:{ user:friend}})
+     }} className='flex flex-col md:flex-row gap-3  lg:flex-row items-center justify-around w-[90%]'>
      <div className="text-center flex flex-col gap-1 sm:text-left">
       <h2 className="text-lg  sm:text-xl capitalize lg:text-2xl">{friend?.firstName + " " + friend?.lastName}</h2>
       <p className="text-sm mt-1 sm:text-base">@{friend?.userName}</p>

@@ -66,10 +66,17 @@ const FriendRequest = (props) => {
    
 
   return  (  <div className=' flex px-2 w-full  shadow py-2 items-center gap-3 shadow-emerald-300'>
-    <div>
+    <div onClick={() => {
+      navigate(`/user/${friend?.userName}` , {state:{ user:friend}})
+     }} 
+     >
       <img src={friend?.image} alt="" className='aspect-square border object-cover max-h-18 rounded-full  ' />
     </div>
-    <div className='p-1 flex flex-col gap-1 '>
+    <div 
+    onClick={() => {
+        navigate(`/user/${friend?.userName}` , {state:{ user:friend}})
+       }}
+        className='p-1 flex flex-col gap-1 '>
         <h4 className='font-semibold text-md capitalize   '>{friend?.firstName + " " + friend?.lastName}                               </h4>
         <p>@{friend?.userName}</p>
     </div>

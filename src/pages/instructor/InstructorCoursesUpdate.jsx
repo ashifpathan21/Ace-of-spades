@@ -17,13 +17,19 @@ const InstructorCourseUpdate = () => {
   const dispatch = useDispatch();
   const [activeStage , setActiveStage] = useState(1) ;
 
-
+function back() {
+    if(activeStage == 1){
+        navigate('/instructor/courses')
+    }else{
+        setActiveStage(activeStage-1)
+    }
+}
 
 
 
   return (
      <div>
-                <button onClick={() => navigate('/instructor/courses')} className="absolute top-1  p-3 ">
+                <button onClick={() =>{back()}} className="absolute top-1  p-3 ">
                     <i className=" text-2xl font-semibold  ri-arrow-left-line"></i>
                 </button>
                 <h2 className="text-2xl font-semibold w-full text-center p-3">Update Course <i className="ri-pencil-fill"></i></h2>

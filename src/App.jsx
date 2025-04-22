@@ -12,6 +12,7 @@ import FindFriends from './pages/FindFriends.jsx'
 import Message from './pages/Message.jsx'
 import Logout from './pages/Auth/Logout.jsx'
 import Task from './pages/Task'
+import ViewUser from './pages/ViewUser'
 import Enroll from "./pages/Enroll.jsx";
 import UserProtectedWrapper from './pages/Auth/UserProtectedWrapper.jsx'
 import InstructorHome from './pages/instructor/InstructorHome.jsx'
@@ -34,6 +35,12 @@ function App() {
  <Route path='/login' element={<Login/>}>  </Route>
  <Route path='/logout' element={<Logout/>}>  </Route>
  <Route path='/signup' element={<Signup/>}>  </Route>
+
+ <Route path='/user/:id' element={
+  
+          <ViewUser/>
+ 
+  }></Route>
 
  <Route path='/profile' element={
    <UserProtectedWrapper>

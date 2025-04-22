@@ -23,7 +23,7 @@ const InstructorsCourses = (props) => {
             props.setShowThisCourseDetails(true);
           }, 0);
         }}
-         className=' hover:scale-110 shadow-lg hover:shadow-2xl text-black   bg-white transition-all duration-700 rounded-xl p-3 flex flex-col ga-2  '>
+         className=' hover:scale-105 shadow  shadow-cyan-300 hover:shadow-md rounded-xl p-3 flex flex-col ga-2 transition-all duration-300'>
               <h2 className=' text-xl font-semibold'>{course.courseName }</h2>
               <div className=' mt-2 flex w-full justify-between gap-2 p-1'>
                 <p className=' text-sm  '>Total Sections: {course.courseContent.length}</p>
@@ -37,7 +37,7 @@ const InstructorsCourses = (props) => {
       <div>
         <button onClick={() => {
           navigate('/instructor/courses')
-        }} className='bg-green-500 p-4 text-xl text-white font-semibold rounded-lg  '>Go to Courses</button>
+        }} className= 'hover:bg-cyan-200 shadow-cyan-300 shadow font-bold py-2 px-4 rounded '>Go to Courses</button>
       </div>
     </div>
   )

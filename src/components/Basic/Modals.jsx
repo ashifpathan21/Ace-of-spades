@@ -36,6 +36,16 @@ const Modals = (props) => {
                 navigate('/courses')
 
               }}>Courses</button>
+              { props?.instructor && <button onClick={()=>{
+                navigate('/instructor/home')
+                dispatch(setShowMenu(false))
+               }}>Dashboard</button>  }
+                {
+               props?.instructor && <button onClick={()=>{
+                navigate('/instructor/courses')
+                dispatch(setShowMenu(false))
+               }}>My Courses</button> 
+             }
              <button onClick={()=>{
                 navigate('/find-friends')
                 dispatch(setShowMenu(false))
@@ -45,15 +55,14 @@ const Modals = (props) => {
                 dispatch(setShowMenu(false))
               }}>ChatRoom</button>
              <button>Startup Support</button>
-             {
-               props.instructor ?  <button onClick={()=>{
-                navigate('/instructor/home')
-                dispatch(setShowMenu(false))
-               }}>Dashboard</button> :   <button onClick={()=>{
+             
+              
+               
+                 <button onClick={()=>{
                 navigate('/about')
                 dispatch(setShowMenu(false))
-               }}><a href=""> About Us</a></button>
-             }
+               }}><a href=""> About Us</a></button> 
+             
            
     
              <p className='text-sm  text-slate-700 px-3 mx-auto mt-5'>Ace of Spades &copy;</p>
