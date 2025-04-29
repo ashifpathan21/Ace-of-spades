@@ -84,7 +84,7 @@ const Enroll = () => {
     }
   }
 
-  const [ratingReviewModal , setRatingReviewModal] = useState(true )
+  const [ratingReviewModal , setRatingReviewModal] = useState(false )
 
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch()
