@@ -13,6 +13,7 @@ import Courses from '../components/Basic/Courses.jsx'
 import Startup from '../components/Basic/Startup.jsx' 
 import ImageSlider from '../components/Basic/ImageSlider.jsx' 
 import WhyUs from '../components/Basic/WhyUs.jsx' 
+import RatingAndReviews from "../components/RatingAndReviews.jsx";
 import Footer from '../components/Basic/Footer.jsx'
 import SliderData from './SliderData.js' 
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,6 +29,59 @@ import {support} from '../services/operations/aiApi'
 
 
 const Home = () => {
+
+    const reviews = [
+        {
+          user: {
+            firstName: "Rohan",
+            lastName: "Mehta",
+            image: "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          rating: 4.5,
+          review: "Amazing experience! The content was well-structured and easy to follow.",
+          date: "April 20, 2025"
+        },
+        {
+          user: {
+            firstName: "Priya",
+            lastName: "Sharma",
+            image: "https://randomuser.me/api/portraits/women/44.jpg"
+          },
+          rating: 5,
+          review: "Perfect course! Loved every bit of it. The examples were super clear.",
+          date: "April 18, 2025"
+        },
+        {
+          user: {
+            firstName: "Ankit",
+            lastName: "Verma",
+            image: "https://randomuser.me/api/portraits/men/52.jpg"
+          },
+          rating: 3.5,
+          review: "Good course for beginners. Some advanced topics were missing though.",
+          date: "April 15, 2025"
+        },
+        {
+          user: {
+            firstName: "Sneha",
+            lastName: "Singh",
+            image: "https://randomuser.me/api/portraits/women/68.jpg"
+          },
+          rating: 4,
+          review: "Really helpful and well-paced. I would recommend it to my juniors.",
+          date: "April 12, 2025"
+        },
+        {
+          user: {
+            firstName: "Mohit",
+            lastName: "Yadav",
+            image: "https://randomuser.me/api/portraits/men/27.jpg"
+          },
+          rating: 2,
+          review: "Some modules were confusing, and support was a bit slow.",
+          date: "April 10, 2025"
+        }
+      ];
 
 //testing
     // useEffect(() => {
@@ -118,7 +172,8 @@ const [loading , setLoading] = useState(false )
 const [help , setHelp ] = useState(false ) ;
 const [input , setInput ] = useState('')
 
-const getSupport = async () => {
+const getSupport = async (e) => {
+    e.preventDefault() ;
     if (!input.trim()) return;  // खाली इनपुट को रोकें
     setLoading(true);
 
@@ -164,6 +219,12 @@ useEffect(() => {
     }
 }, [messages]);
 
+const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      getSupport(e); // Trigger form submission when Enter is pressed
+    }
+  };
+
 const messageBoxRef = useRef(null);
     return (
         <div  className='w-screen relative transition-all duration-700 scroll-smooth overflow-x-hidden'>
@@ -176,12 +237,12 @@ const messageBoxRef = useRef(null);
 
 
          { help ?   //ai chat 
-            <div  className='fixed text-black  h-[80%] w-70 border transition-all  duration-500 shadow-md   bottom-0 mb-3  right-5 flex gap-3 flex-col p-2  justify-start  items-center   rounded-lg '>
+            <div  className='fixed text-black z-10 backdrop-blur-3xl   h-[80%] w-70 border transition-all  duration-500 shadow-md   bottom-0 mb-3  right-5 flex gap-3 flex-col p-2  justify-start  items-center   rounded-lg '>
                 <div className='bg-white w-full flex '>
                     <button className='p-2 font-bold' onClick={() => {
                         setHelp(false)
                     }}><i className="ri-close-large-fill"></i></button>
-                <h1 className="text-2xl bg-white w-full text-center p-2  font-bold ">Chat Support</h1>
+                <h1 className="text-2xl bg-white  w-full text-center p-2  font-bold ">Chat Support</h1>
                 </div>
  
       <div ref={messageBoxRef} className="border px-4 py-2 message-box rounded h-full mb-22 overflow-y-auto w-full  ">
@@ -202,10 +263,12 @@ const messageBoxRef = useRef(null);
       </div>
 
 <div className='absolute rounded-lg p-2  w-full bottom-0  '>
-    <form onSubmit={(e) => {
-        e.preventDefault()
-        getSupport()}} >
+    <form 
+     onSubmit={(e) => {
+       
+        getSupport(e)}} >
     <textarea 
+      onKeyDown={handleKeyDown}
   className="resize-none  bottom-0 left-0 right-0 h-20 w-full bg-white border-t border-gray-300 p-2 focus:outline-none" 
   name="input" 
   placeholder='Enter Your Query '
@@ -237,7 +300,7 @@ const messageBoxRef = useRef(null);
 
             <div onClick={() => {
                 setHelp(true)
-            }} className={`fixed  ${help ? 'h-0' :'h-35'} ease-in transition-all duration-500 w-20 aspect-square  bottom-15 right-5 flex gap-3 flex-col justify-center  items-center  ` }>
+            }} className={`fixed  ${help ? 'h-0' :'h-35'} ease-in z-10 transition-all duration-500 w-20 aspect-square  bottom-15 right-5 flex gap-3 flex-col justify-center  items-center  ` }>
                 <div className='h-4 w-4 aspect-square rounded-full  bg-blue-300 bgpic '>
 
                 </div>
@@ -248,6 +311,12 @@ const messageBoxRef = useRef(null);
 
               <p className='bgpic bg-white text-black rounded-lg p-1 '>May I Help You !</p>
             </div>}
+
+
+            <div className='my-5 p-3 '>
+                <h1 className="text-2xl mb-5 font-bold flex justify-center uppercase">OUR REVIEWS</h1>
+                <RatingAndReviews reviews={reviews} />
+            </div>
 
             <div className="text-2xl mb-5 font-bold flex justify-center uppercase" id='info'>our team</div>
             <ImageSlider images={SliderData} />

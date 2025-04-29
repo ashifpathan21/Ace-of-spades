@@ -2,28 +2,82 @@ import React, { useState, useEffect } from 'react';
 import Navbar from "../components/Basic/Navbar.jsx";
 import ChatFriend from "../components/ChatFriend.jsx";
 import { useSelector, useDispatch } from 'react-redux';
-
+import {useNavigate } from 'react-router-dom'
+import FriendRequest from "../components/FriendRequest";
+import {sendMessage , getMessages} from '../services/operations/messageApi'
 const Message = () => {
 
+  
+  const [friendRequestModal , setFriendRequestModal] = useState(false)
+  const navigate = useNavigate()
   const {user } = useSelector((state) => state.user) ; 
-
+  console.log(user)
+const [loading , setLoading ] = useState()
     const [chat, setChat] = useState(false)
     const [message , setMessage] = useState('')
     const { friends } = user
   return (
-    <div>
+    <div className='min-h-screen '>
           <Navbar />
 
+  
+          <div className={`${friendRequestModal ? 'block' : 'hidden'} h-screen w-screen overflow-y-auto absolute top-0 z-10 backdrop-blur-lg`}>
+               
+                <div className='absolute top-0 p-8 flex justify-center items-center min-h-full  w-full h-full z-10  '>
+                <div onClick={() => setFriendRequestModal(false)} className=' min-h-full absolute z-10 right-10 top-3 text-2xl rounded-lg'>
+                    <i className="ri-close-large-fill"></i>
+                </div>
+                   
+                   <div className='w-full   p-4 flex flex-col gap-3 rounded-lg shadow shadow-cyan-200'>
+                         
+                       <h2 className='p-4 text-center font-bold shadow rounded-lg  shadow-emerald-100 text-xl '>Select Friend </h2>  
+
+                       <div className='flex flex-col p-2 px-1  rounded-lg pb-20 overflow-y-scroll min-h-[40%] gap-3 '>
+                        { loading ? <span className='loader'></span>  :
+                            user?.friends?.map((friend) => {
+                              return <FriendRequest friend={friend} setLoading={setLoading} />
+                            })
+                        }
+                        {
+                            user?.friendRequest?.length <= 0 && <p>No Request !!</p>
+                        }
+                       </div>
+
+                   </div>
+                
+
+                </div>
+                
+
+               
+               
+            </div>
+
           <div className=' flex relative justify-between pt-20 max-w-[400px] md:max-w-[700px] mx-auto lg:max-w-[1000px] '  >
-        
+      
+
+
+
             {/* users  */}
             <div className='w-full   md:w-[48%] lg:w-[48%] flex flex-col '>
                
                <div className='flex w-full justify-evenly '>
                <h2 className=' text-center text-xl '>Friends</h2>
                <div className='flex gap-3 text-xl '>
-               <i className="ri-user-add-fill"></i>
-               <i className="ri-add-box-line"></i>
+                <button onClick={() => {
+                  navigate('/find-friends')
+                }}>
+                <i className="ri-user-add-fill"></i>
+                </button>
+              
+              <button onClick={
+                () => {
+                 setFriendRequestModal(true)
+                }
+              } className=''>
+              <i className="ri-add-box-line"></i>
+              </button>
+              
                </div>
               
 
