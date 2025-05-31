@@ -32,7 +32,7 @@ const AddFriend = (props) => {
               }
                
             } catch (error) {
-              // console.log(error) ;
+              // //(error) ;
               toast.error('Something Went Wrong')
             }
          setLoading(false)

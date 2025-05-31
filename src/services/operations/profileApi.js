@@ -52,7 +52,7 @@ const {
             toast.success(responce.data.message)
             return responce.data.updatedUserDetails 
         } catch (error) {
-          // console.log("UPDATE USER DETAILS API ERROR............", error);
+          // //("UPDATE USER DETAILS API ERROR............", error);
           toast.error(error.message)
       }
       
@@ -79,7 +79,7 @@ const {
         toast.success(response.data.message);
         return response.data;
       } catch (error) {
-        // console.log("ADD COURSE API ERROR............", error);
+        // //("ADD COURSE API ERROR............", error);
       } finally {
         setLoading(false);
       }

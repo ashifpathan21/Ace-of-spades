@@ -23,7 +23,7 @@ const {
 
 export function sendOtp (email , setLoading , setOtpSent ){
         return async (dispatch) => {
-            // console.log('sendiing otp ')
+            // //('sendiing otp ')
                 setLoading(true) ;
               try{
 
@@ -32,15 +32,15 @@ export function sendOtp (email , setLoading , setOtpSent ){
                 if(!responce.data.success){
                     toast.error('Something went wrong , Please try again')
                     setLoading(false)
-                    return // console.log(responce.data.message)
+                    return // //(responce.data.message)
                 }
-                 // console.log(responce) ;
+                 // //(responce) ;
                  toast.success(responce.data.message);
                  setLoading(false);
                  setOtpSent(true) ;
 
               }catch(error){
-              // console.log("SENDOTP API ERROR............", error)
+              // //("SENDOTP API ERROR............", error)
              toast.error("Could Not Send OTP")
                }
              
@@ -78,10 +78,10 @@ export function signUp(
          
         if(!responce.data.success){
             toast.error('Invalid OTP') ;
-            return // console.log(responce.data.message)
+            return // //(responce.data.message)
         }
 
-        // console.log(responce)
+        // //(responce)
 
         let payload = responce.data.user ;
         dispatch(updateUser(payload)) ;
@@ -99,7 +99,7 @@ export function signUp(
         setLoading(false);
         toast.error(error.message)
         navigate('/signup');
-        // console.log("SENDOTP API ERROR............", error)
+        // //("SENDOTP API ERROR............", error)
         toast.error("Could Not verify OTP")
     }
 
@@ -118,7 +118,7 @@ export function getUserDetails(token) {
          
             if (!response.data.success) {
               
-                return // console.log(response.message);
+                return // //(response.message);
             }
 
             const payload = response.data.data;
@@ -126,7 +126,7 @@ export function getUserDetails(token) {
             return payload;
 
         } catch (error) {
-            // console.log("GET USER DETAILS API ERROR............", error);
+            // //("GET USER DETAILS API ERROR............", error);
          
         }
     }
@@ -142,7 +142,7 @@ export function login({ email, password}, setLoading , navigate) {
             if (!response.data.success) {
                 toast.error('Invalid Credentials');
                 setLoading(false);
-                return // console.log(response.data.message);
+                return // //(response.data.message);
             }
 
             
@@ -162,7 +162,7 @@ export function login({ email, password}, setLoading , navigate) {
             setLoading(false);
         
             navigate('/login');
-            // console.log("LOGIN API ERROR............", error);
+            // //("LOGIN API ERROR............", error);
             toast.error(error.response.data.message);
         }
     }

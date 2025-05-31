@@ -131,7 +131,7 @@ const Details = (props) => {
     try {
       dispatch(signUp(signupData, navigate));
     } catch (error) {
-      // console.log(error);
+      // //(error);
     }
   };
 

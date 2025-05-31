@@ -20,7 +20,7 @@ const InstructorCourses = () => {
       const payload = await dispatch(getInstructorCourses(token)) 
      
       } catch (error) {
-      // console.log(error)
+      // //(error)
     
       }     
       setLoading(false)

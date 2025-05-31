@@ -11,9 +11,9 @@ const {
 
 
   export function findFriend ({userName} , token ){
-    // console.log(token)
+    // //(token)
     return async (dispatch) => {
-        // console.log('searching ')
+        // //('searching ')
           
           try{
          
@@ -22,14 +22,14 @@ const {
             if(!responce.data.success){
                 toast.error('Something went wrong , Please try again')
                
-                return // console.log(responce.data.message)
+                return // //(responce.data.message)
             }
            
              
             
                  return responce.data.data
           }catch(error){
-          // console.log("FINDING FRIEND API ERROR............", error)
+          // //("FINDING FRIEND API ERROR............", error)
       
            }
          
@@ -52,14 +52,14 @@ export function sendRequest({friendId} , token ){
           if(!responce.data.success){
               toast.error('Something went wrong , Please try again')
              
-              return // console.log(responce.data.message)
+              return // //(responce.data.message)
           }
            
            
           
                return responce
         }catch(error){
-        // console.log("Sending FRIEND Request  API ERROR............", error)
+        // //("Sending FRIEND Request  API ERROR............", error)
     
          }
        
@@ -81,13 +81,13 @@ export function acceptRequest({requesterId} , token ){
           if(!responce.data.success){
               toast.error('Something went wrong , Please try again')
              
-              return // console.log(responce.data.message)
+              return // //(responce.data.message)
           }
            
            
                return responce
         }catch(error){
-         console.log("accept FRIEND Request  API ERROR............", error)
+         //("accept FRIEND Request  API ERROR............", error)
     
          }
        
@@ -109,13 +109,13 @@ export function rejectRequest({requesterId} , token ){
           if(!responce.data.success){
               toast.error('Something went wrong , Please try again')
              
-              return // console.log(responce.data.message)
+              return // //(responce.data.message)
           }
            
            
                return responce
         }catch(error){
-        // console.log("Sending FRIEND Request  API ERROR............", error)
+        // //("Sending FRIEND Request  API ERROR............", error)
     
          }
        

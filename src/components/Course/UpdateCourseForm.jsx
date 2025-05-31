@@ -106,7 +106,7 @@ const UpdateCourseForm = (props) => {
       toast.success('Course Updated Successfully')
       navigate('/instructor/courses')
       } catch (error) {
-       // console.log(error)
+       // //(error)
       }
       setWaiting(false)
       }
@@ -153,7 +153,7 @@ const [stat , setStat] = useState('Draft')
             toast.error('Something went wrong , Please try again..')
           }
         } catch (error) {
-            // console.log(error)
+            // //(error)
         }
         setLoading(false) }
      upd() 

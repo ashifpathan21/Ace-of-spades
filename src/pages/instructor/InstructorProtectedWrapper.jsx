@@ -33,7 +33,7 @@ const InstructorProtectedWrapper = ({ children }) => {
     const payload = await dispatch(getInstructorCourses(token)) 
    await  setCourse(payload)
     } catch (error) {
-    // console.log(error)
+    // //(error)
     }     
     }
 
@@ -60,7 +60,7 @@ const InstructorProtectedWrapper = ({ children }) => {
             setIsLoading(false);
         }
     }).catch(err => {
-        // console.log(err) ;
+        // //(err) ;
         navigate('/')
     })  
 

@@ -54,7 +54,7 @@ export default function QuestionForm(props) {
       setQuestionId(question._id);
       setStep("options");
     } catch (error) {
-      // console.log("Error adding question:", error);
+      // //("Error adding question:", error);
       resetForm();
     }
     setWaiting(false);
@@ -70,7 +70,7 @@ export default function QuestionForm(props) {
       if (options.length === 3) setStep("correctOption");
       setOption("");
     } catch (error) {
-      // console.log("Error adding option:", error);
+      // //("Error adding option:", error);
       await deleteQuestionn(questionId);
       resetForm();
     }
@@ -87,7 +87,7 @@ export default function QuestionForm(props) {
         resetForm();
       
     } catch (error) {
-      // console.log("Error setting correct option:", error);
+      // //("Error setting correct option:", error);
       await deleteQuestionn(questionId);
       resetForm();
     }
@@ -101,7 +101,7 @@ export default function QuestionForm(props) {
       await dispatch(deleteQuestion({ subSectionId: subsectionId, questionId: id }, token));
       setQuestions(questions.filter((q) => q._id !== id));
     } catch (error) {
-      // console.log("Error deleting question:", error);
+      // //("Error deleting question:", error);
     }
     setWaiting(false);
   };

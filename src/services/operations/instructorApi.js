@@ -52,7 +52,7 @@ export function getInstructorCourses(token){
   
         return response.data.data ;
       } catch (error) {
-        // console.log(error)
+        // //(error)
       }
       
     }
@@ -73,7 +73,7 @@ export function getInstructorTopCourses(token){
   
         return response.data.data ;
       } catch (error) {
-        // console.log(error)
+        // //(error)
       }
       
     }

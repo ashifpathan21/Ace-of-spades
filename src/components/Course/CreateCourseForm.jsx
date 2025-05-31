@@ -78,11 +78,11 @@ const completeCourse= () => {
 
   try {
     const responce = await dispatch(updateCourse({courseId ,updates:{status:stat} } , token))
-// console.log(responce)
+// //(responce)
 toast.success('Course Created Successfully')
 navigate('/instructor/courses')
   } catch (error) {
-    // console.log(error)
+    // //(error)
     
   }
   
@@ -95,10 +95,10 @@ setWaiting(false)
 const [stat , setStat] = useState('Draft')
 const changeStatus = (e) => {
   async function change() {
-    // console.log(e.target.value)
+    // //(e.target.value)
     setStat(e.target.value)
     await setStatus(e.target.value)
-    // console.log(status)
+    // //(status)
   }
   change()
 }
@@ -123,7 +123,7 @@ const finalPrice = price === 'free' ? 0 : actualPrice ;
       instructions
           } , token  ))
 
-          // console.log(course)
+          // //(course)
           setCourseId(course._id) ;
           props.setActiveStage(2);
           setLoading(false )

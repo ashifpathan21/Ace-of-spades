@@ -33,7 +33,7 @@ const AboutUs = () => {
 
             let prev = index ?  index - 1 : data.length - 1   ;
             setIndex(prev)
-            // console.log(index)
+            // //(index)
         }} className='bg-white p-2 text-slate-500 rounded-lg font-bold text-4xl'>{'<'}</button>
         <button 
         onClick={() => {

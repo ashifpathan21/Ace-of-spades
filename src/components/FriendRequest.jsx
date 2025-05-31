@@ -29,7 +29,7 @@ const FriendRequest = (props) => {
             }
         }).catch(err => {
           
-            console.log(err) ;
+            //(err) ;
             localStorage.removeItem('token');
             navigate('/login')
         })  
@@ -45,7 +45,7 @@ const FriendRequest = (props) => {
         
         toast.success(responce.data.message)
      } catch (error) {
-        console.log(error)
+        //(error)
      }
    }
 

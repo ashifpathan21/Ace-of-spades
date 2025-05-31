@@ -89,7 +89,7 @@ getSec()
         setLoading(false);
         setCreateSectionModal(false) ;
       }catch(err){
-        // console.log(err)
+        // //(err)
         toast.error('Something Went Wrong ')
       }
     }
@@ -103,7 +103,7 @@ function update(id){
     try{
       const payload = await dispatch(updateSection({sectionName , sectionId , courseId , token }))
       }catch(err){
-              // console.log(err)
+              // //(err)
               toast.error('Something Went Wrong ')
             }}
   updateSec()
@@ -123,7 +123,7 @@ function update(id){
         setWaiting(false);
        
       }catch(err){
-        // console.log(err)
+        // //(err)
         toast.error('Something Went Wrong ')
       }
     }
@@ -147,14 +147,14 @@ async function subSec() {
   setWaiting(true)
   try {
     const payload = await dispatch(createSubSection({sectionId , title , description , videoUrl } , token )) ;
-   //  console.log(payload)
+   //  //(payload)
     let subS =  payload?.subSection ;
-   //  console.log(subS)
+   //  //(subS)
       let index = subS?.length -1 ;
-    // console.log(index)
+    // //(index)
     setSubsectionId(subS[index]._id);
   } catch (error) {
-   console.log(error)
+   //(error)
     toast.error('Something Went Wrong ')
   }
   setWaiting(false)
@@ -174,7 +174,7 @@ function updateSub(e){
       setQuestionModal(true)
      
     } catch (error) {
-      console.log(error)
+      //(error)
     }
     setWaiting(false)
   }
@@ -191,7 +191,7 @@ function updateSub(e){
         const responce = await dispatch(deleteSubSectionn({ sectionId:secId ,subSectionId:id  }, token))
      await dispatch(getCourseDetailsInstructor({courseId} , token))
       } catch (error) {
-        // console.log(error)
+        // //(error)
         toast.error('Something Went Wrong')
       }
       setWaiting(false)
@@ -210,7 +210,7 @@ function updateSub(e){
 // async function getCourse() {
 //   setWaiting(true)
 //    const responce = await dispatch(getCourseDetailsInstructor({courseId }, token))
-//    // console.log(responce)
+//    // //(responce)
 //   setWaiting(false)
 // }
 // getCourse()

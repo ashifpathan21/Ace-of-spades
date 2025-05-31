@@ -33,7 +33,7 @@ const Navbar = () => {
   useEffect(() => {
     if(socket && user?._id){
      socket.emit('join' , {userId: user._id}) ;
-    // console.log(user) ;
+    // //(user) ;
     }
     }, [socket , user?._id])
     

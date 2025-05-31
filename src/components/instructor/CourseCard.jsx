@@ -21,7 +21,7 @@ const CourseCard = ({ course }) => {
          const res = await dispatch(getInstructorCourses(token))
          toast.success('Course Deleted ')
       }catch(error) {
-         // console.log(error)
+         // //(error)
       }
      setWaiting(false)
    }

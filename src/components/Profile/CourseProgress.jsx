@@ -9,11 +9,11 @@ const CourseProgress = (props) => {
     let compSubsec = 0 ;
     let subsections = 0 ;
 useEffect(() => {
-  // console.log(course)
+  // //(course)
   course.courseContent.map((section) => subsections += section.subSection.length)
   const progress = user?.courseProgress.filter((cours) => cours.courseID === course._id)[0] 
-  // console.log(progress)
-  // console.log(progress?.completedVideos)
+  // //(progress)
+  // //(progress?.completedVideos)
   setCompletedSubSections(progress?.completedVideos?.length || '0')
 setTotalSubsections(subsections)
 

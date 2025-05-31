@@ -71,6 +71,7 @@ export const courseEndpoints = {
 // RATINGS AND REVIEWS
 export const ratingsEndpoints = {
   REVIEWS_DETAILS_API: BASE_URL + "/course/getReviews",
+  GET_AVERAGE_RATING_API: BASE_URL +'/course/getAverageRating'
 }
 
 // CATAGORIES API

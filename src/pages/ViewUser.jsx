@@ -19,7 +19,7 @@ const ViewUser = () => {
   
 
     useEffect(() => {
-        console.log(user)
+        //(user)
         if (user) {
            setLoading(true)
             user?.courseProgress?.forEach((subSection) => {

@@ -51,7 +51,7 @@ export function getAllCategories(navigate) {
       return response.data.data ;
      
     } catch (error) {
-      // console.log("COURSE_CATEGORY_API API ERROR............", error)
+      // //("COURSE_CATEGORY_API API ERROR............", error)
       toast.error(error.message)
     }
   }
@@ -91,7 +91,7 @@ export function createNewCourse({
       return response.data.data ;
      
     } catch (error) {
-      // console.log("COURSE_CATEGORY_API API ERROR............", error)
+      // //("COURSE_CATEGORY_API API ERROR............", error)
       toast.error('Something went wrong ')
     }
   }
@@ -126,7 +126,7 @@ export function deleteSectionn({
   return response.data.data
 
   } catch (error) {
-    // console.log("delete section  API ERROR............", error)
+    // //("delete section  API ERROR............", error)
     toast.error('Something went wrong ')
   }
 
@@ -150,7 +150,7 @@ export function createSectionn({
     await dispatch(setCourse(payload))
   return response.data.updatedCourse
   } catch (error) {
-    // console.log("create section  API ERROR............", error)
+    // //("create section  API ERROR............", error)
     toast.error('Something went wrong ')
   }
   }
@@ -168,7 +168,7 @@ return async (dispatch) => {
      sectionName , sectionId , courseId 
     }, { Authorization: `Bearer ${token}`} )
    
-   // console.log(response) 
+   // //(response) 
 
 
     if (!response?.data?.success) {
@@ -182,7 +182,7 @@ return async (dispatch) => {
   return response.data.data
 
   } catch (error) {
-    // console.log("update section  API ERROR............", error)
+    // //("update section  API ERROR............", error)
     toast.error('Something went wrong ')
   }
 
@@ -207,7 +207,7 @@ videoUrl
         videoUrl
       }, { Authorization: `Bearer ${token}`} )
      
-     // console.log(response) 
+     // //(response) 
   
   
       if (!response?.data?.success) {
@@ -221,7 +221,7 @@ videoUrl
     return response.data.data
   
     } catch (error) {
-      // console.log("update subsection  API ERROR............", error)
+      // //("update subsection  API ERROR............", error)
       toast.error('Something went wrong ')
     }
 
@@ -239,11 +239,11 @@ export function getAllCourses(){
       }
       const payload = response.data.data;
    
-      // console.log(payload)
+      // //(payload)
       await dispatch(setCourses(payload))
     return response.data.data
     } catch (error) {
-      // console.log("Get course   API ERROR............", error)
+      // //("Get course   API ERROR............", error)
       toast.error('Something went wrong ')
     }
   }
@@ -266,7 +266,7 @@ token){
    
     return response.data.data.courseDetails
     } catch (error) {
-      // console.log("Get course   API ERROR............", error)
+      // //("Get course   API ERROR............", error)
       toast.error('Something went wrong ')
     }
   }
@@ -292,7 +292,7 @@ export function createSubSection({
      
     return response.data.data
     } catch (error) {
-      // console.log("CREATE SUBSECTION  API ERROR............", error)
+      // //("CREATE SUBSECTION  API ERROR............", error)
       toast.error('Something went wrong ')
     }
     
@@ -318,7 +318,7 @@ export function addQuestion({
      return response.data.question
 
     }catch(error){
-      // console.log("ADD QUESTION  API ERROR............", error)
+      // //("ADD QUESTION  API ERROR............", error)
       toast.error('Something went wrong ')
     }
   }
@@ -341,7 +341,7 @@ export function addOption({
      return response.data.updateQuestion
 
     }catch(error){
-      // console.log("ADD OPTION  API ERROR............", error)
+      // //("ADD OPTION  API ERROR............", error)
       toast.error('Something went wrong ')
     }
   }
@@ -368,7 +368,7 @@ export function addCorrectOption({
     return response.data.question
 
    }catch(error){
-     // console.log("ADD OPTION  API ERROR............", error)
+     // //("ADD OPTION  API ERROR............", error)
      toast.error('Something went wrong ')
      toast.error(error.message)
      
@@ -399,7 +399,7 @@ subSectionId
 
 
     }catch(error){
-      // console.log(error)
+      // //(error)
     }
   }
 }
@@ -425,7 +425,7 @@ export function deleteQuestion({
 
 
     }catch(error){
-      // console.log(error)
+      // //(error)
     }
   }
 }
@@ -442,7 +442,7 @@ updates
         courseId , updates
       }, { Authorization: `bearer ${token}`} )
     
-      // console.log(responce)
+      // //(responce)
       if (!responce?.data.success) {
         throw new Error("Could not Fetch Course categories")
       }
@@ -453,7 +453,7 @@ updates
 
 
     }catch(error){
-      // console.log(error)
+      // //(error)
     }
     
     dispatch(getInstructorCourses(token)) ;
@@ -470,11 +470,11 @@ export function delelteCourse(
 , token ){
   return async (dispatch) => {
     try{
-      // console.log(courseId)
+      // //(courseId)
       const responce = await apiConnector('DELETE' , DELETE_COURSE_API , {
        courseId
       }, { Authorization: `bearer ${token}`} )
-    // console.log(responce )
+    // //(responce )
       if (!responce?.status === 200) {
         throw new Error("Could not Fetch Course categories")
       }
@@ -485,7 +485,7 @@ export function delelteCourse(
 
 
     }catch(error){
-      // console.log(error)
+      // //(error)
     }
   }
 }
@@ -495,11 +495,11 @@ export function delelteCourse(
 export function completeLecture({courseId , subsectionId , correctQuestions} , token){
   return async (dispatch) => {
     try{
-      // console.log(courseId)
+      // //(courseId)
       const responce = await apiConnector('POST' , LECTURE_COMPLETION_API , {
        courseId , subsectionId , correctQuestions
       }, { Authorization: `bearer ${token}`} )
-    // console.log(responce )
+    // //(responce )
       if (!responce?.status === 200) {
         throw new Error("Could not Complete Lecture")
       }
@@ -510,7 +510,7 @@ export function completeLecture({courseId , subsectionId , correctQuestions} , t
 
 
     }catch(error){
-      // console.log(error)
+      // //(error)
     }
 
 

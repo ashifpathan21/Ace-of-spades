@@ -32,7 +32,7 @@ export function sendMessage(senderId, receiverId, content, setLoading, clearInpu
         if (clearInput) clearInput();
   
       } catch (error) {
-        console.log("SEND MESSAGE ERROR >>>", error);
+        //("SEND MESSAGE ERROR >>>", error);
         toast.error("Could not send message.");
         setLoading(false);
       }
@@ -57,7 +57,7 @@ export function getMessages(friendId, setLoading) {
         setLoading(false);
   
       } catch (error) {
-        console.log("GET MESSAGES ERROR >>>", error);
+        //("GET MESSAGES ERROR >>>", error);
         toast.error("Failed to fetch messages.");
         setLoading(false);
       }}

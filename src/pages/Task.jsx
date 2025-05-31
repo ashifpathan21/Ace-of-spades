@@ -52,7 +52,7 @@ const [correctQuestions , setCorrectQuestions] = useState([])
 const match = () => {
   if(questions[questionIndex].correctOption.options === choose){
     setCorrectQuestions((prev) => [...prev, questions[questionIndex]._id]);
-// console.log(correctQuestions)
+// //(correctQuestions)
 toast('Correct!', {
   icon: '👏',
 });
@@ -61,7 +61,7 @@ toast('Correct!', {
   }
   setCorrectOption(questions[questionIndex].correctOption.options)
   setSubmitted(true) ;
-  // console.log(submitted)
+  // //(submitted)
 }
 
 const [disable , setDisable] = useState(false)
@@ -106,9 +106,9 @@ useEffect(()=> {
             subSection = section.subSection[complete ];
             break;
         } else {
-          // console.log(complete)
+          // //(complete)
             complete -= course.courseContent[i]?.subSection?.length;
-            // console.log(complete)
+            // //(complete)
         }
     }
     

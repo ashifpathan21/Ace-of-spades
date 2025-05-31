@@ -11,10 +11,10 @@ const SocketContex = ({ children }) => {
   
 
     socket.on('connect', () => {
-      // console.log('connected to server');
+      // //('connected to server');
     });
     socket.on('disconnect', () => {
-      // console.log('disconnected to server');
+      // //('disconnected to server');
     } );
 
    

@@ -11,7 +11,7 @@ const Message = () => {
   const [friendRequestModal , setFriendRequestModal] = useState(false)
   const navigate = useNavigate()
   const {user } = useSelector((state) => state.user) ; 
-  console.log(user)
+  //(user)
 const [loading , setLoading ] = useState()
     const [chat, setChat] = useState(false)
     const [message , setMessage] = useState('')

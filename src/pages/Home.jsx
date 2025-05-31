@@ -25,12 +25,12 @@ import { getUserDetails } from '../services/operations/authApi.js'; // Import th
 import { getAllCategories } from '../services/operations/coursesApi';
 import { setCategories } from "../Slices/courseSlice"
 import {support} from '../services/operations/aiApi'
-
+import { fetchAllRatingsAndReviews  } from './../services/operations/ratingAndReview.js'
 
 
 const Home = () => {
 
-    const reviews = [
+    const review = [
         {
           user: {
             firstName: "Rohan",
@@ -83,6 +83,32 @@ const Home = () => {
         }
       ];
 
+
+      const [reviews , setReviews] = useState(review) ;
+
+
+
+//  useEffect(() => {
+    
+//   async function getReviews() {
+//     try {
+//       const reviw = await dispatch(fetchAllRatingsAndReviews())
+//       //(reviw)
+//       if(!reviw.length){
+//         setReviews( review)
+//       }else
+//        setReviews(reviw) ;
+      
+//     } catch (err) {
+//       toast.error('Something went Wrong')
+//       setReviews(review)
+//     }
+//   }
+  
+//   getReviews() ;
+
+//  } , [])
+
 //testing
     // useEffect(() => {
     //     async function gett() {
@@ -99,7 +125,7 @@ const Home = () => {
     //             // withCredentials: false or remove this line
     //           }
     //         );
-    //         // console.log("✅ Got response:", res.data);
+    //         // //("✅ Got response:", res.data);
     //       } catch (err) {
     //         // console.error("❌ Axios Error:", err);
     //       }
