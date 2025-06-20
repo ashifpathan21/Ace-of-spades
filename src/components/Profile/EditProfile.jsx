@@ -133,7 +133,7 @@ const EditProfile = (props) => {
       setLoading(false)
       setUserNameStatus('initial');
       setUserNameError('Error checking username availability');
-      // console.error("Error checking username:", error);
+      // //console.error("Error checking username:", error);
     }
   };
 
@@ -178,7 +178,7 @@ const EditProfile = (props) => {
        navigate('/profile')
      
     } catch (error) {
-      // console.error('Profile update failed:', error);
+      // //console.error('Profile update failed:', error);
     } finally {
       setLoading(false);
     }

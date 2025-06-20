@@ -25,22 +25,37 @@ const [userName , setUserName] = useState('')
   setLoading(true)
       try {
   
-       const Friend = await dispatch(findFriend({userName} , token)) ;
-      
-       const exceptUser = Friend.filter((friend ) => {friend._id != user._id }) ;
-       const filteredUsers = exceptUser.filter(
-        (u) => !user.friends.some(friendId => friendId.toString() === u._id.toString())
-      );
-      const Friends = Friend.filter((u) =>
-        user.friends.includes(u._id)
-      );
-    
-      setAlreadyFriend(Friends)
-       setFriends(filteredUsers)
+      const Friend = await dispatch(findFriend({ userName }, token));
+
+// Remove current user from the list
+const exceptUser = Friend.filter(friend => friend._id !== user._id);
+
+
+// Filter out users who are already friends
+const filteredUsers = exceptUser.filter(
+  (u) =>
+    !user.friends.some(
+      (f) => f.user._id.toString() === u._id.toString()
+    )
+);
+
+
+// Get users who are already friends
+const Friends = Friend.filter((u) =>
+  user.friends.some(
+    (f) => f.user._id.toString() === u._id.toString()
+  )
+);
+
+
+// Update state
+setAlreadyFriend(Friends);
+setFriends(filteredUsers);
+
 
       } catch (error) {
         
-        // console.error("Error finding friends:", error);
+        // //console.error("Error finding friends:", error);
       }
       setLoading(false)
     };

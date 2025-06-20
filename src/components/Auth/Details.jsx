@@ -72,7 +72,7 @@ const Details = (props) => {
       setUserLoading(false)
       setUserNameStatus('initial');
       setUserNameError('Error checking username availability');
-      // console.error("Error checking username:", error);
+      // //console.error("Error checking username:", error);
     }
   };
 
@@ -93,7 +93,7 @@ const Details = (props) => {
   try {
     dispatch(login({ email: loginEmail, password: loginPassword  } , setLoading, navigate));
   } catch (error) {
-    // console.error("Login failed:", error);
+    // //console.error("Login failed:", error);
   }
   };
 

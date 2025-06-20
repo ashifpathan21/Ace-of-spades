@@ -13,8 +13,8 @@ export const endpoints = {
   ACCEPT_REQUEST: BASE_URL + '/auth/accept-friend-request',
   REJECT_REQUEST: BASE_URL + '/auth/reject-friend-request',
   GET_REVIEW: BASE_URL + '/auth/support',
-  SEND_MESSAGE: BASE_URL + '/auth/send' ,
-  GET_MESSAGES: BASE_URL + '/auth/' 
+  SEND_MESSAGE: BASE_URL + '/auth/sendMessage' ,
+  SEEN_MESSAGE: BASE_URL + '/auth/seenMessage' 
 }
 
 // PROFILE ENDPOINTS

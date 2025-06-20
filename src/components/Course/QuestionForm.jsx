@@ -32,7 +32,7 @@ export default function QuestionForm(props) {
             .find((sub) => sub._id === subsectionId)?.questions || [];
         setQuestions(quest);
       } catch (error) {
-        // console.error("Error fetching questions:", error);
+        // //console.error("Error fetching questions:", error);
       } finally {
         setReloadQuestions(false);
       }

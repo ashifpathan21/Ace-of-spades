@@ -6,30 +6,24 @@ import toast from 'react-hot-toast'
 
  const {
     SEND_MESSAGE ,
-    GET_MESSAGES
+    SEEN_MESSAGE
   } = endpoints ;
 
-export function sendMessage(senderId, receiverId, content, setLoading, clearInput) {
+export function sendMessage({to, text} , token) {
     return async (dispatch) => {
-      setLoading(true);
-  
+         //console.log(to , text ,token)
       try {
         const response = await apiConnector("POST", SEND_MESSAGE, {
-          senderId,
-          receiverId,
-          content,
-        });
+          to , text 
+        } , { Authorization: `Bearer ${token}`});
   
         if (!response.data.success) {
           toast.error("Message not sent. Try again.");
-          setLoading(false);
           return;
         }
-  
+        //console.log(response)
         toast.success("Message sent!");
-        dispatch({ type: "ADD_MESSAGE", payload: response.data.message }); // adjust based on your backend response
-        setLoading(false);
-        if (clearInput) clearInput();
+       return response.data
   
       } catch (error) {
         //("SEND MESSAGE ERROR >>>", error);
@@ -40,25 +34,26 @@ export function sendMessage(senderId, receiverId, content, setLoading, clearInpu
   }
 
 
-export function getMessages(friendId, setLoading) {
-    return async (dispatch) => {
-      setLoading(true);
-  
-      try {
-        const response = await apiConnector("GET", `${GET_MESSAGES}/${friendId}`);
-  
-        if (!response.data.success) {
-          toast.error("Could not load messages.");
-          setLoading(false);
-          return;
-        }
-  
-        dispatch({ type: "SET_MESSAGES", payload: response.data.messages });
-        setLoading(false);
-  
-      } catch (error) {
-        //("GET MESSAGES ERROR >>>", error);
-        toast.error("Failed to fetch messages.");
-        setLoading(false);
-      }}
+export function markMessagesAsSeen(chatId, token) {
+  return async () => {
+    try {
+      const res = await apiConnector(
+        "PUT",
+        SEEN_MESSAGE,
+        { chatId },
+        { Authorization: `Bearer ${token}` }
+      );
+
+      const data = res?.data;
+      if (!data?.success) {
+        toast.error("Failed to mark messages as seen.");
+        return;
+      }
+
+      //console.log("✅ Messages marked as seen");
+    } catch (err) {
+      //console.error("❌ Error marking seen:", err?.response || err);
+      toast.error("Could not mark messages as seen.");
     }
+  };
+}

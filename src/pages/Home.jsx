@@ -127,7 +127,7 @@ const Home = () => {
     //         );
     //         // //("✅ Got response:", res.data);
     //       } catch (err) {
-    //         // console.error("❌ Axios Error:", err);
+    //         // //console.error("❌ Axios Error:", err);
     //       }
     //     }
     //     gett();
@@ -186,7 +186,7 @@ const Home = () => {
                     dispatch(setIsLoggedIn(false));
                 }
             } catch (error) {
-                // console.error("Failed to fetch user details:", error);
+                // //console.error("Failed to fetch user details:", error);
                 dispatch(setIsLoggedIn(false));
             }
         };
@@ -228,7 +228,7 @@ const getSupport = async (e) => {
             });
         }
     } catch (error) {
-        // console.error("Error fetching AI response:", error);
+        // //console.error("Error fetching AI response:", error);
         setMessages((prev) => {
             const updatedMessages = [...prev, { sender: "ai", text: "Something went wrong" }];
             sessionStorage.setItem("messages", JSON.stringify(updatedMessages));

@@ -89,7 +89,7 @@ const UpdateCourseForm = (props) => {
           setThumbnail(uploadImageURL.url);
           setLoading(false);
         } catch (error) {
-          // console.error('Error uploading thumbnail:', error);
+          // //console.error('Error uploading thumbnail:', error);
           setLoading(false);
         }
       }

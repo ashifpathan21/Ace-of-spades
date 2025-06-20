@@ -14,7 +14,7 @@ const {
             const response = await apiConnector("POST", GET_REVIEW, { input });
             return response.data; 
         } catch (error) {
-            // console.error("AI Support API Error:", error);
+            // //console.error("AI Support API Error:", error);
             return "Something went wrong!";
         }
     };

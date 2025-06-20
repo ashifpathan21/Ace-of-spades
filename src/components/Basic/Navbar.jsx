@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleDarkMode, setIsLoggedIn , toggleProfileModal, setProfileModal ,  toggleShowMenu } from '../../Slices/pagesSlice';
 
-import { SocketContext } from '../../Socket/SocketContex'
+import { SocketContext } from '../../context/SocketContext'
 
 
 const Navbar = () => {
