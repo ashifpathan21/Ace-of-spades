@@ -9,7 +9,7 @@ import { SocketContext } from '../context/SocketContext.jsx';
 import CryptoJS from 'crypto-js';
 import toast from 'react-hot-toast';
 import moment from 'moment';
-
+import { updateUser } from '../Slices/userSlice.js';
 const secretKey = import.meta.env.VITE_CHAT_SECRET_KEY;
 
 const Message = () => {
@@ -42,24 +42,47 @@ const Message = () => {
     if (socket && user?._id) {
       socket.emit('join', { userId: user._id });
 
-      socket.on('newMessage', (data) => {
-        if (data.from === chatFriend?._id) {
-          const newMsg = { ...data, isNew: true };
-          setMessages(prev => [...prev, newMsg]);
+     // Inside socket.on("newMessage")
+socket.on('newMessage', (data) => {
+  if (data.from === chatFriend?._id) {
+    const newMsg = { ...data, isNew: true };
+    setMessages(prev => [...prev, newMsg]);
 
-          // Mark as seen
-          dispatch(markMessagesAsSeen(chatFriend.chat._id, token));
-          socket.emit("seen-message", { chatId: chatFriend.chat._id, to: chatFriend._id });
+ 
+const updatedFriends = user.friends.map(f =>
+  f.user._id === chatFriend._id
+    ? {
+        ...f,
+        chat: {
+          ...f.chat,
+          messages: [...(f.chat.messages || []), newMsg], // ✅ newMsg add करो
+        },
+      }
+    : f
+);
 
-          setTimeout(() => {
-            setMessages(prev =>
-              prev.map((msg, i) =>
-                i === prev.length - 1 ? { ...msg, isNew: false, isSeen: true } : msg
-              )
-            );
-          }, 300);
-        }
-      });
+const updatedUser = {
+  ...user,
+  friends: updatedFriends,
+};
+
+dispatch(updateUser(updatedUser)); // ✅ Pure object payload
+
+
+
+
+    dispatch(markMessagesAsSeen(chatFriend.chat._id, token));
+    socket.emit("seen-message", { chatId: chatFriend.chat._id, to: chatFriend._id });
+
+    setTimeout(() => {
+      setMessages(prev =>
+        prev.map((msg, i) =>
+          i === prev.length - 1 ? { ...msg, isNew: false, isSeen: true } : msg
+        )
+      );
+    }, 300);
+  }
+});
 
       socket.on("typing", ({ from }) => {
         if (chatFriend && from === chatFriend._id) setIsTyping(true);
@@ -111,9 +134,32 @@ const Message = () => {
       setMessages([...messages, res.data]);
       setMessage('');
       socket.emit("stopTyping", { to: chatFriend._id });
+        const updatedFriends = user.friends.map(f =>
+  f.user._id === chatFriend._id
+    ? {
+        ...f,
+        chat: {
+          ...f.chat,
+          messages: [...(f.chat.messages || []), res.data], // ✅ newMsg add करो
+        },
+      }
+    : f
+);
+
+const updatedUser = {
+  ...user,
+  friends: updatedFriends,
+};
+
+dispatch(updateUser(updatedUser)); // ✅ Pure object payload
     } catch (err) {
       toast.error("Could not send message.");
     }
+ 
+
+
+
+
   };
 
   const decryptMessage = (cipher) => {
@@ -175,35 +221,38 @@ const Message = () => {
         </div>
 
         {chatFriend && (
-          <div className='w-full md:w-1/2 border rounded-lg p-4 relative flex flex-col min-h-[80vh]'>
+          <div className='w-full md:w-1/2 border rounded-lg h-screen  p-4 relative flex flex-col min-h-[80vh]'>
             <div className='flex items-center gap-3 mb-4'>
               <div className='p-4 cursor-pointer' onClick={() => setChatFriend(null)}>
                 <i className="ri-close-large-fill"></i>
               </div>
               <img
                 src={chatFriend.image || `https://api.dicebear.com/5.x/initials/svg?seed=${chatFriend.firstName + ' ' + chatFriend.lastName}`}
-                className='w-10 h-10 rounded-full'
+                className='w-10 h-10 aspect-square object-cover rounded-full'
               />
               <h2 className='font-bold'>{chatFriend.firstName} {chatFriend.lastName}</h2>
             </div>
 
-            <div className='flex-1 overflow-y-auto mb-4'>
-              {messages.map((msg, idx) => (
-                <div
-                  key={idx}
-                  className={`p-2 my-1 text-black rounded-lg max-w-[70%]
-                    ${msg.from === user._id ? 'bg-blue-100 ml-auto' : 'bg-gray-100'}
-                    ${msg.isNew ? 'border border-green-500 shadow shadow-green-300' : ''}`}
-                >
-                  <p>{decryptMessage(msg.text)}</p>
+            <div className='flex-1 overflow-y-scroll mb-4'>
+          
+{messages.map((msg, idx) => (
+  <div
+    key={idx}
+    className={`p-2 my-1 text-black rounded-lg max-w-[70%]
+      ${msg.from === user._id ? 'bg-blue-100 ml-auto' : 'bg-gray-100'}
+      ${msg.isNew ? 'border border-green-500 shadow shadow-green-300' : ''}`}
+  >
+    <p>{decryptMessage(msg.text)}</p>
 
-                  {msg?.isSeen && msg?.from === user._id && (
-                    <small className='text-[10px] text-blue-500 mt-1 block'>
-                      ✔ Seen at {moment(msg.updatedAt).format("h:mm A")}
-                    </small>
-                  )}
-                </div>
-              ))}
+    {/* ✅ Only show "seen" on last message sent by user */}
+    {msg?.isSeen && msg?.from === user._id && idx === messages.length - 1 && (
+      <small className='text-[10px] text-blue-500 mt-1 block'>
+        ✔ Seen at {moment(msg.updatedAt).format("h:mm A")}
+      </small>
+    )}
+  </div>
+))}
+
               <div ref={messagesEndRef} />
             </div>
 

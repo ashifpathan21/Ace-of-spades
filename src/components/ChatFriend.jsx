@@ -1,29 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import moment from 'moment';
 
 const ChatFriend = ({ friend, chat, onSelect, decryptMessage }) => {
-  const [isActive, setIsActive] = useState(friend?.active);
-  const [latestMessage, setLatestMessage] = useState(null);
-  const [isNewMessage, setIsNewMessage] = useState(false);
-
-  // 🔄 Update state every 10 seconds
-  useEffect(() => {
-    const updateValues = () => {
-      setIsActive(friend?.active);
-      const latest = chat?.messages?.[chat.messages.length - 1];
-      setLatestMessage(latest);
-
-      const isNew = latest &&
-        !latest.isSeen &&
-        latest.from === friend._id;
-      setIsNewMessage(isNew);
-    };
-
-    updateValues(); // initial
-    const interval = setInterval(updateValues, 10000); // every 10 sec
-
-    return () => clearInterval(interval);
-  }, [chat, friend]);
+  const latestMessage = chat?.messages?.at(-1);
+  const isNewMessage = latestMessage &&
+    !latestMessage.isSeen &&
+    latestMessage.from === friend._id;
 
   return (
     <div
@@ -31,7 +13,7 @@ const ChatFriend = ({ friend, chat, onSelect, decryptMessage }) => {
       className='cursor-pointer p-2 hover:shadow shadow-cyan-300 rounded flex items-center gap-3 relative'
     >
       {/* 🟢 Online Dot */}
-      {isActive && (
+      {friend?.active && (
         <div className='absolute bottom-4 left-14 w-3 h-3 bg-green-500 rounded-full animate-pulse'></div>
       )}
 
@@ -56,9 +38,9 @@ const ChatFriend = ({ friend, chat, onSelect, decryptMessage }) => {
           </span>
         </div>
 
-        {latestMessage?.timestamp && (
+        {latestMessage?.updatedAt && (
           <span className='text-xs text-gray-400'>
-            {moment(latestMessage.timestamp).fromNow()}
+            {moment(latestMessage.updatedAt).fromNow()}
           </span>
         )}
       </div>
