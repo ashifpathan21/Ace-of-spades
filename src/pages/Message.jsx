@@ -17,7 +17,7 @@ const Message = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector(state => state.user);
-
+  const [isSending , setIsSending] = useState(false)
   const [friendRequestModal, setFriendRequestModal] = useState(false);
   const [chatFriend, setChatFriend] = useState(null);
   const [message, setMessage] = useState('');
@@ -126,8 +126,9 @@ dispatch(updateUser(updatedUser)); // ✅ Pure object payload
   }, [messages]);
 
   const handleSendMessage = async () => {
+    
     if (!message.trim()) return;
-
+     setIsSending(true)
     try {
       const encryptedText = CryptoJS.AES.encrypt(message, secretKey).toString();
       const res = await dispatch(sendMessage({ to: chatFriend._id, text: encryptedText }, token));
@@ -155,11 +156,7 @@ dispatch(updateUser(updatedUser)); // ✅ Pure object payload
     } catch (err) {
       toast.error("Could not send message.");
     }
- 
-
-
-
-
+ setIsSending(false)
   };
 
   const decryptMessage = (cipher) => {
@@ -221,25 +218,34 @@ dispatch(updateUser(updatedUser)); // ✅ Pure object payload
         </div>
 
         {chatFriend && (
-          <div className='w-full md:w-1/2 border rounded-lg h-screen  p-4 relative flex flex-col min-h-[80vh]'>
-            <div className='flex items-center gap-3 mb-4'>
+          <div className='w-full md:w-1/2 shadow shadow-cyan-400 rounded-lg h-screen  p-4 relative flex flex-col min-h-[80vh]'>
+            <div className='flex shadow shadow-cyan-800 items-center gap-3 mb-4'>
               <div className='p-4 cursor-pointer' onClick={() => setChatFriend(null)}>
                 <i className="ri-close-large-fill"></i>
               </div>
-              <img
+              <div className='relative'>
+                 {chatFriend?.active && (
+        <div className='absolute bottom-0 left-7 w-3 h-3 bg-green-500 rounded-full animate-pulse'></div>
+      )}
+               <img
                 src={chatFriend.image || `https://api.dicebear.com/5.x/initials/svg?seed=${chatFriend.firstName + ' ' + chatFriend.lastName}`}
                 className='w-10 h-10 aspect-square object-cover rounded-full'
-              />
-              <h2 className='font-bold'>{chatFriend.firstName} {chatFriend.lastName}</h2>
-            </div>
+               />
+              </div>
+             
+              <div className='flex flex-col gap-1'>
+                <h2 className='font-bold'>{chatFriend.firstName} {chatFriend.lastName}</h2>
+                { chatFriend?.active && <span className='text-gray-400 text-sm '>Active Now</span>}
+              </div>
+              </div>
 
-            <div className='flex-1 overflow-y-scroll mb-4'>
+            <div className='flex-1  overflow-y-scroll mb-4'>
           
 {messages.map((msg, idx) => (
   <div
     key={idx}
-    className={`p-2 my-1 text-black rounded-lg max-w-[70%]
-      ${msg.from === user._id ? 'bg-blue-100 ml-auto' : 'bg-gray-100'}
+    className={`p-2 my-2 rounded-lg max-w-[70%]
+      ${msg.from === user._id ? 'shadow-red-400 shadow ml-auto' : 'shadow-emerald-600 shadow '}
       ${msg.isNew ? 'border border-green-500 shadow shadow-green-300' : ''}`}
   >
     <p>{decryptMessage(msg.text)}</p>
@@ -265,15 +271,16 @@ dispatch(updateUser(updatedUser)); // ✅ Pure object payload
           placeholder='Type your message...'
           value={message}
          onChange={handleTyping}
+     
         onKeyDown={(e) => {
-          if (e.key === 'Enter' && !e.shiftKey) {
+          if (!isSending &&  e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault(); // new line add न हो
          handleSendMessage(); // message भेजो
       }
           }}
          />
 
-              <button onClick={handleSendMessage} className='text-2xl'>
+              <button disabled={isSending} onClick={handleSendMessage} className='text-2xl'>
                 <i className="ri-send-plane-fill"></i>
               </button>
             </div>
