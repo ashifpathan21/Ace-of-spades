@@ -37,7 +37,9 @@ const CourseCard = ({ course }) => {
     <div className="shadow shadow-cyan-200  rounded-lg flex justify-between  hover:shadow-md hover:scale-105 transition-all duration-500  p-4">
         <div>
            <h3 className="text-lg font-semibold mb-2">{course.courseName}</h3>
-           <p className="">{course.courseDescription}</p>
+           
+
+
         </div>
      
      {

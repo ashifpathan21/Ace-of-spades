@@ -246,7 +246,7 @@ setCompl(isCompleted);
                   <div className='p-4 px-2 flex flex-col gap-5  '>
   <h3 className='font-semibold w-full text-slate-400 text-lg capitalize '>{ selectedCourse?.courseName?.slice(0, 10) + '...>'  + sectionName + ">" + subSection?.title?.slice(0, 10) + ".."}</h3>
 
-                  <div className='w-full flex justify-center items-center  mt-5 '>
+                  { videoUrl && <div className='w-full flex justify-center items-center  mt-5 '>
                   <iframe 
  className="w-full aspect-video rounded-lg shadow-lg"
 
@@ -256,16 +256,16 @@ setCompl(isCompleted);
  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture fullscreen"
   allowFullScreen
  ></iframe>
-                  </div>
+                  </div>}
                    <div className='w-full p-3  '>
                    <p className='text-center capitalize font-bold text-lg pb-3'>{subSection?.title}</p>
-                   <div className='max-w-[600px]  md:max-w-[750px] lg:max-w-[850px] mx-auto mt-3'>
-                   <textarea   style={{ height: `${Math.min(450, Math.max(200, subSection?.description?.length ))}px` }}
-                     className="w-full capitalize p-2 resize-none h-full  rounded-lg"
-                     value={subSection?.description}
-                     readOnly
-                   />
-                   </div>
+                 <div className='max-w-[600px] md:max-w-[750px] lg:max-w-[850px] mx-auto mt-3'>
+  <div
+    style={{ height: `${Math.min(450, Math.max(200, subSection?.description?.length))}px` }}
+    className="prose dark:prose-invert  p-4 overflow-y-auto rounded-lg"
+    dangerouslySetInnerHTML={{ __html: subSection?.description }}
+  />
+</div>
 
                    </div>
                   

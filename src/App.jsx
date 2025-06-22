@@ -54,9 +54,9 @@ function App() {
  
   }></Route>
  <Route path='/courses/:id' element={
-    <UserProtectedWrapper>
+  
           <Enroll/>
-  </UserProtectedWrapper>
+
   }></Route>
  <Route path='/courses/progress/:id' element={
     <UserProtectedWrapper>

@@ -1,11 +1,23 @@
 import { useState, useEffect } from "react";
-import { addQuestion, addOption, addCorrectOption, deleteQuestion } from "../../services/operations/coursesApi";
+import {
+  addQuestion,
+  addOption,
+  addCorrectOption,
+  deleteQuestion,
+} from "../../services/operations/coursesApi";
 import { useDispatch, useSelector } from "react-redux";
 import { getInstructorCourses } from "../../services/operations/instructorApi";
-import '../../index.css'
+import "../../index.css";
+
 export default function QuestionForm(props) {
   const { courses } = useSelector((state) => state.instructorCourses);
-  const { setQuestionModal, setSubsectionModal, courseId, sectionId, subsectionId } = props;
+  const {
+    setQuestionModal,
+    setSubsectionModal,
+    courseId,
+    sectionId,
+    subsectionId,
+  } = props;
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
@@ -32,7 +44,6 @@ export default function QuestionForm(props) {
             .find((sub) => sub._id === subsectionId)?.questions || [];
         setQuestions(quest);
       } catch (error) {
-        // //console.error("Error fetching questions:", error);
       } finally {
         setReloadQuestions(false);
       }
@@ -50,11 +61,12 @@ export default function QuestionForm(props) {
     if (!currentQuestion.trim()) return;
     setWaiting(true);
     try {
-      const question = await dispatch(addQuestion({ subSectionId: subsectionId, questionText: currentQuestion }, token));
+      const question = await dispatch(
+        addQuestion({ subSectionId: subsectionId, questionText: currentQuestion }, token)
+      );
       setQuestionId(question._id);
       setStep("options");
     } catch (error) {
-      // //("Error adding question:", error);
       resetForm();
     }
     setWaiting(false);
@@ -64,13 +76,11 @@ export default function QuestionForm(props) {
     if (!option.trim() || options.length >= 4) return;
     setWaiting(true);
     try {
-      
       await dispatch(addOption({ questionId, optionText: option }, token));
       setOptions([...options, option]);
       if (options.length === 3) setStep("correctOption");
       setOption("");
     } catch (error) {
-      // //("Error adding option:", error);
       await deleteQuestionn(questionId);
       resetForm();
     }
@@ -81,13 +91,15 @@ export default function QuestionForm(props) {
     if (!correctOption.trim()) return;
     setWaiting(true);
     try {
-      const response = await dispatch(addCorrectOption({ subSectionId: subsectionId, questionId, correctOption }, token));
-      
-        setReloadQuestions(true);
-        resetForm();
-      
+      await dispatch(
+        addCorrectOption(
+          { subSectionId: subsectionId, questionId, correctOption },
+          token
+        )
+      );
+      setReloadQuestions(true);
+      resetForm();
     } catch (error) {
-      // //("Error setting correct option:", error);
       await deleteQuestionn(questionId);
       resetForm();
     }
@@ -101,7 +113,6 @@ export default function QuestionForm(props) {
       await dispatch(deleteQuestion({ subSectionId: subsectionId, questionId: id }, token));
       setQuestions(questions.filter((q) => q._id !== id));
     } catch (error) {
-      // //("Error deleting question:", error);
     }
     setWaiting(false);
   };
@@ -115,17 +126,8 @@ export default function QuestionForm(props) {
     setQuestionId("");
   };
 
-
-if(waiting){
   return (
-    <div className='min-h-screen flex justify-center items-center'>
-      <span className='loader'></span>
-    </div>
-  )
-}
-
-  return (
-    <div className="max-w-4xl mx-auto p-6  rounded-lg shadow-md mt-10">
+    <div className="max-w-4xl mx-auto p-6 rounded-lg shadow-md mt-10">
       <h1 className="text-2xl font-bold text-center mb-6">Question Form</h1>
 
       {step === "question" && (
@@ -184,7 +186,7 @@ if(waiting){
 
       <div className="mt-6">
         <h2 className="text-lg font-bold mb-4">Questions Added</h2>
-        <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {waiting ? (
             <p>Loading...</p>
           ) : questions?.length <= 0 ? (
@@ -205,7 +207,11 @@ if(waiting){
                   {q?.options?.map((opt, i) => (
                     <li
                       key={i}
-                      className={opt?.options === q?.correctOption?.options ? "text-green-500 font-bold" : ""}
+                      className={
+                        opt?.options === q?.correctOption?.options
+                          ? "text-green-500 font-bold"
+                          : ""
+                      }
                     >
                       {opt?.options}
                     </li>
