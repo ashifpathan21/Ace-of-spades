@@ -27,7 +27,7 @@ const Enroll = () => {
   const [course , setCourse] = useState('')
 
   useEffect(() => {
-    const payload = courses.filter((course) => course._id === id)[0];
+    const payload = courses?.filter((course) => course._id === id)[0];
     setCourse(payload);
     setReviewes(payload?.ratingAndReviews);
   }, [])
@@ -38,7 +38,7 @@ const Enroll = () => {
       setLoading(true)
       try {
         const responce = await dispatch(fetchAverageRating({courseId: course._id}));
-        console.log(course)
+       
         const already = course?.ratingAndReviews?.some(
           (review) => review?.user._id.toString() === user._id.toString()
         );
