@@ -27,7 +27,7 @@ const Enroll = () => {
   const [course , setCourse] = useState('')
 
   useEffect(() => {
-    const payload = courses?.filter((course) => course._id === id)[0];
+    const payload = courses?.filter((course) => course?._id === id)[0];
     setCourse(payload);
     setReviewes(payload?.ratingAndReviews);
   }, [])
@@ -127,7 +127,7 @@ const Enroll = () => {
                   user?.courses?.some(c => c._id === course._id)
                     ? navigate(`/courses/progress/${course._id}`)
                     : addCourses()
-                }} className={`p-2 text-xl capitalize ${user.courses.some(c => c._id === course._id) ? 'bg-green-400' : 'bg-blue-400'} rounded-lg mt-10 text-slate-200 font-semibold`}>
+                }} className={`p-2 text-xl capitalize ${user?.courses?.some(c => c?._id === course?._id) ? 'bg-green-400' : 'bg-blue-400'} rounded-lg mt-10 text-slate-200 font-semibold`}>
                   {user?.courses?.some(c => c._id === course._id) ? "Go to Course" : "Enroll Now"}
                 </button>
               )}
