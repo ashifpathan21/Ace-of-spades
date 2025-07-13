@@ -12,6 +12,8 @@ import FindFriends from './pages/FindFriends.jsx'
 import Message from './pages/Message.jsx'
 import Logout from './pages/Auth/Logout.jsx'
 import Task from './pages/Task'
+import UpdatePassword from './pages/UpdatePassword.jsx'
+import ForgotPassword from './pages/ForgotPassword.jsx'
 import ViewUser from './pages/ViewUser'
 import Enroll from "./pages/Enroll.jsx";
 import UserProtectedWrapper from './pages/Auth/UserProtectedWrapper.jsx'
@@ -35,6 +37,8 @@ function App() {
  <Route path='/login' element={<Login/>}>  </Route>
  <Route path='/logout' element={<Logout/>}>  </Route>
  <Route path='/signup' element={<Signup/>}>  </Route>
+ <Route path='/update-password/:token' element={<UpdatePassword/>}>  </Route>
+ <Route path='/forget-password' element={<ForgotPassword/>}>  </Route>
 
  <Route path='/user/:id' element={
   
@@ -75,6 +79,9 @@ function App() {
 }
   ></Route>
 
+ 
+
+ 
 
 {/* about use route  */}
 <Route path='/about' element={

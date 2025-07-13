@@ -249,6 +249,10 @@ const Details = (props) => {
                       LogIn
                     </button>
                   </div>
+
+                  <div>
+                    <button className='text-blue-300 cursor-pointer' onClick={()=> navigate('/forget-password')}>Forgot Password</button>
+                  </div>
                 </form>
               </div>
             ) : (
