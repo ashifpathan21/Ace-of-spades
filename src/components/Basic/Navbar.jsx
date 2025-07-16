@@ -90,7 +90,7 @@ const Navbar = () => {
           className='flex transition p-5 duration-200 items-center justify-center'
         >
           <h2 className='md:text-2xl text-lg lg:text-2xl font-semibold lg:font-bold font-serif'>
-            Ace of <span className='text-amber-500 text-2xl'>$</span>pades
+            𝐀Φ<span className='text-amber-500 text-2xl'>$</span>-Shiksha
           </h2>
         </div>
 
