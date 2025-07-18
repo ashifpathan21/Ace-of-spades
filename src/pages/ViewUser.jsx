@@ -3,13 +3,14 @@ import Navbar from "../components/Basic/Navbar";
 import { useLocation } from "react-router-dom";
 import CourseProgress from "../components/Profile/CourseProgress";
 import "../index.css";
+import {useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import Tilt from "react-parallax-tilt";
 
 const ViewUser = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const currentUser = useSelector((state) => state.user.user)
   const { user } = location.state;
   const [correctQuestions, setCorrectQuestions] = useState("");
   const [points, setPoints] = useState("");
@@ -20,6 +21,9 @@ const ViewUser = () => {
 
   useEffect(() => {
     //(user)
+    if(user._id === currentUser._id){
+      navigate('/profile')
+    }
     if (user) {
       setLoading(true);
       setCorrectQuestions(user?.correctQuestions);

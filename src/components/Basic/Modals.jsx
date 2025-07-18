@@ -53,7 +53,7 @@ const Modals = (props) => {
       </div>
 
       <div
-        className={`absolute p-3 gap-4    z-10   right-1 lg:right-5  flex-col  justify-between ${
+        className={`absolute p-3 gap-4    z-10   right-1 lg:right-5 items-center  flex-col  justify-between ${
           props.showMenu
             ? "transition-all duration-1000 flex "
             : "transition-all duration-1000 h-0  hidden"
@@ -62,6 +62,17 @@ const Modals = (props) => {
         } transition-all duration-1000 rounded-lg  w-40 md:w-50 lg:w-60 top-0`}
       >
         <button
+          className="flex md:hidden lg:hidden"
+          onClick={() => {
+            navigate("/leaderboard");
+            dispatch(setShowMenu(false));
+          }}
+        >
+          Leaderboard
+        </button>
+
+        <button
+          className="flex md:hidden lg:hidden"
           onClick={() => {
             navigate("/courses");
           }}
@@ -89,6 +100,7 @@ const Modals = (props) => {
           </button>
         )}
         <button
+          className="flex md:hidden lg:hidden"
           onClick={() => {
             navigate("/find-friends");
             dispatch(setShowMenu(false));
@@ -97,12 +109,13 @@ const Modals = (props) => {
           Find Friends
         </button>
         <button
+          className="flex md:hidden lg:hidden"
           onClick={() => {
             navigate("/chats");
             dispatch(setShowMenu(false));
           }}
         >
-          ChatRoom
+          Chats
         </button>
         <button>Startup Support</button>
 

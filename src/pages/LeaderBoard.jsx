@@ -3,6 +3,7 @@ import Navbar from "../components/Basic/Navbar.jsx";
 import { getLeaderboardData } from "../services/operations/leaderBoard.js";
 import Player from "../components/Player";
 import { useDispatch, useSelector } from "react-redux";
+import '../index.css'
 import TopThreeLeaderboard from "../components/TopThreeLeaderboard.jsx";
 const LeaderBoard = () => {
   const dispatch = useDispatch();
@@ -15,20 +16,26 @@ const LeaderBoard = () => {
   const [college, setCollege] = useState(collegeLeaderboard);
   const [leaderboard, setLeaderboard] = useState(globalLeaderboard);
   const [collegeMode, setCollegeMode] = useState(false);
-
+  const [loading , setLoading ] = useState(false) ; 
   useEffect(() => {
+    setLoading(true)
     const getDetails = async () => {
       try {
         const res = await dispatch(getLeaderboardData(token));
-        console.log(res);
         setGlobal(res?.globalLeaderboard);
         setLeaderboard(res?.globalLeaderboard);
         setCollege(res?.collegeLeaderboard);
       } catch (error) {}
     };
     getDetails();
+    setLoading(false)
   }, [token]);
-
+ 
+  if(loading){
+    return <div className='h-screen w-screen flex justify-center items-center '>
+      <span className='loader'></span>
+    </div>
+  }
   return (
     <div className="min-h-screen h-screen  w-screen ">
       <Navbar />
@@ -55,7 +62,7 @@ const LeaderBoard = () => {
       <div className=" flex flex-col gap-5   p-4 ">
         <TopThreeLeaderboard leaderboard={leaderboard} userId={user?._id} />
         <div className="max-h-[45vh] overflow-y-auto flex flex-col gap-5 px-3">
-          {leaderboard.slice(3).map((player, i) => (
+          {leaderboard?.slice(3).map((player, i) => (
             <Player
               key={player._id}
               rank={i + 4}

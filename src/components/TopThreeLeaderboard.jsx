@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Confetti from "react-confetti-boom";
+import {useNavigate } from 'react-router-dom' 
 const TopThreeLeaderboard = ({ leaderboard, userId }) => {
-  const topThree = leaderboard.slice(0, 3);
+  const topThree = leaderboard?.slice(0, 3);
+  const navigate = useNavigate()
 
   const positions = ["#2", "#1", "#3"]; // Left, Center, Right
 
@@ -10,14 +12,15 @@ const TopThreeLeaderboard = ({ leaderboard, userId }) => {
 
   return (
     <div className="flex justify-center h-full items-end gap-8  py-3 rounded-lg text-white">
-      {containerOrder.map((pos, idx) => {
+      {containerOrder?.map((pos, idx) => {
         const player = topThree[pos];
 
         if (!player) return null;
 
         return (
           <div
-            key={player._id}
+            key={player?._id}
+            onClick={() => navigate(`/user/${player?.userName}` , {state:{user:player}})}
             className={`flex flex-col relative items-center justify-end w-[100px] ${
               idx === 1 ? "scale-130" : "scale-95"
             }`}

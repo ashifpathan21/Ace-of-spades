@@ -35,7 +35,6 @@ export function getSuggestions(token) {
       dispatch(setColleges(response.data));
       return response.data;
     } catch (error) {
-      console.log(error);
       toast.error("Failed to load suggestions");
     }
   };

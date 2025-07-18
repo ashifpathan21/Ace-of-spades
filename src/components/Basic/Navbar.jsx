@@ -93,7 +93,7 @@ const Navbar = () => {
             </h2>
           </div>
 
-          <div className="flex justify-between items-center relative px-4 w-[50%] md:w-[35%] lg:w-[35%]">
+          <div className="flex justify-between items-center relative px-4 w-[50%] md:w-[65%] lg:w-[65%]">
             <div
               onClick={toggleMode}
               className="cursor-pointer transition duration-100"
@@ -103,6 +103,43 @@ const Navbar = () => {
               ) : (
                 <i className="ri-sun-line"></i>
               )}
+            </div>
+
+            <div className="hidden md:flex ml-10 font-semibold gap-4  lg:flex p-2  w-full ">
+              <button 
+              className='underline block p-1 hover:text-slate-300 transition-all duration-150 cursor-pointer'
+                onClick={() => {
+                  navigate("/courses");
+                }}
+              >
+                Courses
+              </button>
+              <button 
+              className='underline block p-1 hover:text-slate-300 transition-all duration-150 cursor-pointer'
+                onClick={() => {
+                  navigate("/leaderboard");
+                }}
+              >
+                Leaderboard
+              </button>
+              <button 
+              className='underline block p-1 hover:text-slate-300 transition-all duration-150 cursor-pointer'
+                onClick={() => {
+                  navigate("/chats");
+                }}
+              >
+                Chats
+              </button>
+              <button 
+              className='underline block p-1 hover:text-slate-300 transition-all duration-150 cursor-pointer'
+                onClick={() => {
+                  navigate("/find-friends");
+                }}
+              >
+                Find Friends
+              </button>
+
+
             </div>
 
             <div>

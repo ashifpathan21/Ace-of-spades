@@ -3,6 +3,7 @@ import "../index.css";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Navbar from "../components/Basic/Navbar.jsx";
+import AOSLoader from "../components/AOSLoader.jsx";
 import Hero from "../assets/hero.gif";
 import bg from "../assets/startup-bg.gif";
 import Start from "../assets/start.jpg";
@@ -92,60 +93,16 @@ const Home = () => {
   ];
 
   const [reviews, setReviews] = useState(review);
-
-  //  useEffect(() => {
-
-  //   async function getReviews() {
-  //     try {
-  //       const reviw = await dispatch(fetchAllRatingsAndReviews())
-  //       //(reviw)
-  //       if(!reviw.length){
-  //         setReviews( review)
-  //       }else
-  //        setReviews(reviw) ;
-
-  //     } catch (err) {
-  //       toast.error('Something went Wrong')
-  //       setReviews(review)
-  //     }
-  //   }
-
-  //   getReviews() ;
-
-  //  } , [])
-
-  //testing
-  // useEffect(() => {
-  //     async function gett() {
-  //       try {
-  //         const res = await axios.post(
-  //           "https://ace-of-spades-backend.onrender.com/api/v1/auth/support",
-  //           {
-  //             input: "hy gemini",
-  //           },
-  //           {
-  //             headers: {
-  //               "Content-Type": "application/json",
-  //             },
-  //             // withCredentials: false or remove this line
-  //           }
-  //         );
-  //         // //("✅ Got response:", res.data);
-  //       } catch (err) {
-  //         // //console.error("❌ Axios Error:", err);
-  //       }
-  //     }
-  //     gett();
-  //   }, []);
-
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isDarkMode, isLoggedIn, showMenu, profileModal } = useSelector(
     (state) => state.pages
   );
-  const { user } = useSelector((state) => state.user);
 
+  const [loading , setLoading] = useState(false)
+  const { user } = useSelector((state) => state.user);
+   const [courseLoading , setCourseLoading] = useState(false)
   const [messages, setMessages] = useState([]);
 
   //getting category for update form we have to take it from the sessionStorage for optimising --- pending //completed
@@ -185,7 +142,7 @@ const Home = () => {
     fetchUserDetails();
   }, [token, dispatch]);
 
-  const [loading, setLoading] = useState(false);
+  
 
   const [help, setHelp] = useState(false);
   const [input, setInput] = useState("");
@@ -250,13 +207,18 @@ const Home = () => {
   };
 
   const messageBoxRef = useRef(null);
+
+
+  if(courseLoading){
+    return <AOSLoader />
+  }
   return (
     <div className="w-screen relative transition-all duration-700 scroll-smooth overflow-x-hidden">
       <Navbar />
       <HeroSection />
 
       <StartWith isDarkMode={isDarkMode} />
-      <Courses />
+      <Courses setCourseLoading={setCourseLoading} />
       <Startup isDarkMode={isDarkMode} />
 
       {help ? ( //ai chat
