@@ -100,9 +100,9 @@ const Home = () => {
     (state) => state.pages
   );
 
-  const [loading , setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const { user } = useSelector((state) => state.user);
-   const [courseLoading , setCourseLoading] = useState(false)
+  const [courseLoading, setCourseLoading] = useState(false);
   const [messages, setMessages] = useState([]);
 
   //getting category for update form we have to take it from the sessionStorage for optimising --- pending //completed
@@ -141,8 +141,6 @@ const Home = () => {
     };
     fetchUserDetails();
   }, [token, dispatch]);
-
-  
 
   const [help, setHelp] = useState(false);
   const [input, setInput] = useState("");
@@ -208,9 +206,19 @@ const Home = () => {
 
   const messageBoxRef = useRef(null);
 
+  useEffect(() => {
+    setCourseLoading(true);
 
-  if(courseLoading){
-    return <AOSLoader />
+    const timer = setTimeout(() => {
+      setCourseLoading(false);
+    }, 3000); // 3 seconds
+
+    return () => clearTimeout(timer); // Cleanup if component unmounts
+  }, []); // Run once
+  
+
+  if (courseLoading) {
+    return <AOSLoader />;
   }
   return (
     <div className="w-screen relative transition-all duration-700 scroll-smooth overflow-x-hidden">

@@ -8,20 +8,20 @@ import Course from "./Course";
 import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCourses } from "../../services/operations/coursesApi";
-const Courses = ({ setCourseLoading }) => {
+const Courses = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     
     async function getCourses() {
       
-    setCourseLoading(true)
+   
       try {
         const courses = await dispatch(getAllCourses());
       } catch (error) {
         toast.error("Something went wrong");
       }
-     setCourseLoading(false);
+     
     }
 
     getCourses();
