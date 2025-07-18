@@ -34,28 +34,36 @@ const MenuBar = ({ editor }) => {
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={`${buttonBase} ${editor.isActive("heading", { level: 1 }) ? active : ""}`}
+        className={`${buttonBase} ${
+          editor.isActive("heading", { level: 1 }) ? active : ""
+        }`}
       >
         <Heading1 size={16} /> H1
       </button>
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={`${buttonBase} ${editor.isActive("heading", { level: 2 }) ? active : ""}`}
+        className={`${buttonBase} ${
+          editor.isActive("heading", { level: 2 }) ? active : ""
+        }`}
       >
         <Heading2 size={16} /> H2
       </button>
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={`${buttonBase} ${editor.isActive("bulletList") ? active : ""}`}
+        className={`${buttonBase} ${
+          editor.isActive("bulletList") ? active : ""
+        }`}
       >
         <List size={16} /> Bullet
       </button>
       <button
         type="button"
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={`${buttonBase} ${editor.isActive("codeBlock") ? active : ""}`}
+        className={`${buttonBase} ${
+          editor.isActive("codeBlock") ? active : ""
+        }`}
       >
         <Code2 size={16} /> Code
       </button>

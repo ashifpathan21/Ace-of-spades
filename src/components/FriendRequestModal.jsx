@@ -1,11 +1,15 @@
-import React from 'react';
-import FriendRequest from './FriendRequest';
+import React from "react";
+import FriendRequest from "./FriendRequest";
 
-const FriendRequestModal = ({ user, loading, setLoading, setFriendRequestModal }) => {
+const FriendRequestModal = ({
+  user,
+  loading,
+  setLoading,
+  setFriendRequestModal,
+}) => {
   return (
     <div className="h-screen w-screen overflow-y-auto absolute top-0 z-10 backdrop-blur-lg">
       <div className="absolute top-0 p-8 flex justify-center items-center min-h-full w-full h-full z-10">
-        
         {/* Close Button */}
         <button
           onClick={() => setFriendRequestModal(false)}

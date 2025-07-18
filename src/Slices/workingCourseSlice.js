@@ -1,21 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    course:{},
-}
+  course: {},
+};
 
 const workingCourseSlice = createSlice({
-    name: 'createCourse',
-    initialState,
-    reducers: {
-      setCourse: (state, action) => {
-       
-        state.courses = action.payload; 
-   
-    }},
-  });
-  
-  export const {setCourse} = workingCourseSlice.actions;
-  
-  export default workingCourseSlice.reducer;
+  name: "createCourse",
+  initialState,
+  reducers: {
+    setCourse: (state, action) => {
+      state.courses = action.payload;
+    },
+  },
+});
+
+export const { setCourse } = workingCourseSlice.actions;
+
+export default workingCourseSlice.reducer;

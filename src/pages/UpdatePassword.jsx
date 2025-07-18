@@ -1,38 +1,40 @@
-import { useState } from "react"
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { BiArrowBack } from "react-icons/bi"
-import { useDispatch, useSelector } from "react-redux"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { BiArrowBack } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { resetPassword } from "../services/operations/authApi.js"
+import { resetPassword } from "../services/operations/authApi.js";
 
 function UpdatePassword() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const location = useLocation()
- const [loading , setLoading ] = useState(false)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     password: "",
     confirmPassword: "",
-  })
+  });
 
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const { password, confirmPassword } = formData
+  const { password, confirmPassword } = formData;
 
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   const handleOnSubmit = (e) => {
-    e.preventDefault()
-    const token = location.pathname.split("/").at(-1)
-    dispatch(resetPassword(password, confirmPassword, token, navigate , setLoading))
-  }
+    e.preventDefault();
+    const token = location.pathname.split("/").at(-1);
+    dispatch(
+      resetPassword(password, confirmPassword, token, navigate, setLoading)
+    );
+  };
 
   return (
     <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
@@ -113,7 +115,7 @@ function UpdatePassword() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default UpdatePassword
+export default UpdatePassword;

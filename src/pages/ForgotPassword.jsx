@@ -1,19 +1,19 @@
-import { useState } from "react"
-import { BiArrowBack } from "react-icons/bi"
-import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { useState } from "react";
+import { BiArrowBack } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { getPasswordResetToken } from "../services/operations/authApi.js"
+import { getPasswordResetToken } from "../services/operations/authApi.js";
 
 function ForgotPassword() {
-  const [email, setEmail] = useState("")
-  const [emailSent, setEmailSent] = useState(false)
-  const dispatch = useDispatch()
- const [loading , setLoading ] =  useState(false)
+  const [email, setEmail] = useState("");
+  const [emailSent, setEmailSent] = useState(false);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const handleOnSubmit = (e) => {
-    e.preventDefault()
-    dispatch(getPasswordResetToken(email, setEmailSent , setLoading))
-  }
+    e.preventDefault();
+    dispatch(getPasswordResetToken(email, setEmailSent, setLoading));
+  };
 
   return (
     <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
@@ -63,7 +63,7 @@ function ForgotPassword() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default ForgotPassword
+export default ForgotPassword;

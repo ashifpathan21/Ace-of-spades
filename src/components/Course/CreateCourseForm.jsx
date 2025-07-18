@@ -1,10 +1,13 @@
-import React, { useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import toast from 'react-hot-toast';
-import RichTextEditor from '../RichTextEditor.jsx';
-import { useNavigate } from 'react-router-dom';
-import { createNewCourse, updateCourse } from '../../services/operations/coursesApi';
-import SectionForm from './SectionForm';
+import React, { useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import toast from "react-hot-toast";
+import RichTextEditor from "../RichTextEditor.jsx";
+import { useNavigate } from "react-router-dom";
+import {
+  createNewCourse,
+  updateCourse,
+} from "../../services/operations/coursesApi";
+import SectionForm from "./SectionForm";
 
 const CreateCourseForm = (props) => {
   const dispatch = useDispatch();
@@ -15,18 +18,18 @@ const CreateCourseForm = (props) => {
   const [waiting, setWaiting] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [courseName, setCourseName] = useState('');
-  const [courseDescription, setCourseDescription] = useState('');
-  const [whatYouWillLearn, setWhatYouWillLearn] = useState('');
-  const [price, setPrice] = useState('');
-  const [actualPrice, setActualPrice] = useState('');
-  const [category, setCategory] = useState('');
-  const [status, setStatus] = useState('Draft');
-  const [thumbnail, setThumbnail] = useState('');
-  const [instructions, setInstructions] = useState('');
-  const [courseId, setCourseId] = useState('');
+  const [courseName, setCourseName] = useState("");
+  const [courseDescription, setCourseDescription] = useState("");
+  const [whatYouWillLearn, setWhatYouWillLearn] = useState("");
+  const [price, setPrice] = useState("");
+  const [actualPrice, setActualPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [status, setStatus] = useState("Draft");
+  const [thumbnail, setThumbnail] = useState("");
+  const [instructions, setInstructions] = useState("");
+  const [courseId, setCourseId] = useState("");
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const changeStage = (num) => {
     props.setActiveStage(num);
@@ -37,18 +40,21 @@ const CreateCourseForm = (props) => {
     if (file) {
       setLoading(true);
       const data = new FormData();
-      data.append('file', file);
-      data.append('upload_preset', 'aceofspades');
-      data.append('cloud_name', 'dslhfux94');
+      data.append("file", file);
+      data.append("upload_preset", "aceofspades");
+      data.append("cloud_name", "dslhfux94");
       try {
-        const res = await fetch('https://api.cloudinary.com/v1_1/dslhfux94/image/upload', {
-          method: 'POST',
-          body: data,
-        });
+        const res = await fetch(
+          "https://api.cloudinary.com/v1_1/dslhfux94/image/upload",
+          {
+            method: "POST",
+            body: data,
+          }
+        );
         const uploadImageURL = await res.json();
         setThumbnail(uploadImageURL.url);
       } catch (error) {
-        toast.error('Thumbnail upload failed. Please try again.');
+        toast.error("Thumbnail upload failed. Please try again.");
       } finally {
         setLoading(false);
       }
@@ -59,10 +65,10 @@ const CreateCourseForm = (props) => {
     setWaiting(true);
     try {
       await dispatch(updateCourse({ courseId, updates: { status } }, token));
-      toast.success('Course Published Successfully');
-      navigate('/instructor/courses');
+      toast.success("Course Published Successfully");
+      navigate("/instructor/courses");
     } catch (error) {
-      toast.error('Failed to publish course.');
+      toast.error("Failed to publish course.");
     } finally {
       setWaiting(false);
     }
@@ -71,7 +77,7 @@ const CreateCourseForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const finalPrice = price === 'free' ? 0 : actualPrice;
+    const finalPrice = price === "free" ? 0 : actualPrice;
 
     try {
       const course = await dispatch(
@@ -82,7 +88,7 @@ const CreateCourseForm = (props) => {
             whatYouWillLearn,
             price: finalPrice,
             category,
-            status: 'Draft',
+            status: "Draft",
             thumbnail,
             instructions,
           },
@@ -92,24 +98,44 @@ const CreateCourseForm = (props) => {
       setCourseId(course._id);
       props.setActiveStage(2);
     } catch (error) {
-      toast.error('Something went wrong');
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-[1000px] mx-auto mt-8 p-4">
+    <div className="max-w-[1000px] min-h-screen h-full relative mx-auto mt-8 p-4">
       {props.activeStage === 1 && (
         <form onSubmit={handleSubmit} className="space-y-4">
-          <InputField label="Course Name" value={courseName} onChange={setCourseName} id="courseName" />
+          <InputField
+            label="Course Name"
+            value={courseName}
+            onChange={setCourseName}
+            id="courseName"
+          />
 
-          <RichEditor label="Course Description" value={courseDescription} onChange={setCourseDescription} id="courseDescription" />
+          <RichEditor
+            label="Course Description"
+            value={courseDescription}
+            onChange={setCourseDescription}
+            id="courseDescription"
+          />
 
-          <RichEditor label="What You Will Learn" value={whatYouWillLearn} onChange={setWhatYouWillLearn} id="whatYouWillLearn" />
+          <RichEditor
+            label="What You Will Learn"
+            value={whatYouWillLearn}
+            onChange={setWhatYouWillLearn}
+            id="whatYouWillLearn"
+          />
 
           <div>
-            <label htmlFor="price" className="block text-sm font-bold mb-2 text-gray-700">Price:</label>
+            <label
+              htmlFor="price"
+              className="block text-sm font-bold mb-2 text-gray-700"
+            >
+              Price:
+            </label>
             <select
               id="price"
               required
@@ -121,7 +147,7 @@ const CreateCourseForm = (props) => {
               <option value="free">Free</option>
               <option value="paid">Paid</option>
             </select>
-            {price === 'paid' && (
+            {price === "paid" && (
               <div className="flex items-center mt-2 relative">
                 <span className="absolute left-2">₹</span>
                 <input
@@ -137,7 +163,12 @@ const CreateCourseForm = (props) => {
           </div>
 
           <div>
-            <label htmlFor="category" className="block text-sm font-bold mb-2 text-gray-700">Category:</label>
+            <label
+              htmlFor="category"
+              className="block text-sm font-bold mb-2 text-gray-700"
+            >
+              Category:
+            </label>
             <select
               id="category"
               required
@@ -146,14 +177,22 @@ const CreateCourseForm = (props) => {
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">Select a category</option>
-              {categories && categories.map((cat) => (
-                <option key={cat._id} value={cat.name}>{cat.name}</option>
-              ))}
+              {categories &&
+                categories.map((cat) => (
+                  <option key={cat._id} value={cat.name}>
+                    {cat.name}
+                  </option>
+                ))}
             </select>
           </div>
 
           <div>
-            <label htmlFor="thumbnail" className="block text-sm font-bold mb-2 text-gray-700">Thumbnail:</label>
+            <label
+              htmlFor="thumbnail"
+              className="block text-sm font-bold mb-2 text-gray-700"
+            >
+              Thumbnail:
+            </label>
             <input
               type="file"
               required
@@ -162,17 +201,28 @@ const CreateCourseForm = (props) => {
               onChange={onFileChange}
               ref={inputFile}
             />
-            {thumbnail && <img src={thumbnail} alt="Thumbnail" className="mt-2 h-20 w-20 object-cover" />}
+            {thumbnail && (
+              <img
+                src={thumbnail}
+                alt="Thumbnail"
+                className="mt-2 h-20 w-20 object-cover"
+              />
+            )}
           </div>
 
-          <RichEditor label="Instructions" value={instructions} onChange={setInstructions} id="instructions" />
+          <RichEditor
+            label="Instructions"
+            value={instructions}
+            onChange={setInstructions}
+            id="instructions"
+          />
 
           <button
             type="submit"
             disabled={loading}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
-            {loading ? 'Uploading...' : 'Create Course'}
+            {loading ? "Uploading..." : "Create Course"}
           </button>
         </form>
       )}
@@ -183,7 +233,9 @@ const CreateCourseForm = (props) => {
 
       {props.activeStage === 3 && (
         <div className="bg-white rounded-lg text-black p-3">
-          <h2 className="text-center text-xl font-semibold">Publish Your Course</h2>
+          <h2 className="text-center text-xl font-semibold">
+            Publish Your Course
+          </h2>
           <div className="w-[90%] mt-10 mx-auto mb-10 shadow-xl rounded-lg">
             <p className="p-2">Set Status</p>
             <form className="w-full border rounded-lg">
@@ -205,7 +257,7 @@ const CreateCourseForm = (props) => {
               className="p-3 px-5 bg-green-500 text-white font-semibold rounded-lg"
               disabled={waiting}
             >
-              {waiting ? 'Publishing...' : 'Submit'}
+              {waiting ? "Publishing..." : "Submit"}
             </button>
           </div>
         </div>
@@ -216,7 +268,9 @@ const CreateCourseForm = (props) => {
 
 const InputField = ({ label, value, onChange, id }) => (
   <div>
-    <label htmlFor={id} className="block text-sm font-bold mb-2 text-gray-700">{label}:</label>
+    <label htmlFor={id} className="block text-sm font-bold mb-2 text-gray-700">
+      {label}:
+    </label>
     <input
       type="text"
       id={id}
@@ -231,7 +285,9 @@ const InputField = ({ label, value, onChange, id }) => (
 
 const RichEditor = ({ label, value, onChange, id }) => (
   <div>
-    <label htmlFor={id} className="block text-sm font-bold mb-2 text-gray-700">{label}:</label>
+    <label htmlFor={id} className="block text-sm font-bold mb-2 text-gray-700">
+      {label}:
+    </label>
     <RichTextEditor
       id={id}
       required

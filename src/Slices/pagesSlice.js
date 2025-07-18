@@ -1,49 +1,49 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isLoggedIn: false ,
-  isDarkMode: false,
+  isLoggedIn: false,
+  isDarkMode: true,
   showModal: false,
   showMenu: false,
   profileModal: false,
-}
+};
 
 const pagesSlice = createSlice({
-  name: 'pages',
+  name: "pages",
   initialState,
   reducers: {
     setIsLoggedIn: (state, action) => {
-      state.isLoggedIn = action.payload
+      state.isLoggedIn = action.payload;
     },
     toggleLogin: (state) => {
-      state.isLoggedIn = !state.isLoggedIn
+      state.isLoggedIn = !state.isLoggedIn;
     },
     setIsDarkMode: (state, action) => {
-      state.isDarkMode = action.payload
+      state.isDarkMode = action.payload;
     },
     toggleDarkMode: (state) => {
-      state.isDarkMode = !state.isDarkMode
+      state.isDarkMode = !state.isDarkMode;
     },
     setShowModal: (state, action) => {
-      state.showModal = action.payload
+      state.showModal = action.payload;
     },
     toggleShowModal: (state) => {
-      state.showModal = !state.showModal
+      state.showModal = !state.showModal;
     },
     setShowMenu: (state, action) => {
-      state.showMenu = action.payload
+      state.showMenu = action.payload;
     },
     toggleShowMenu: (state) => {
-      state.showMenu = !state.showMenu
+      state.showMenu = !state.showMenu;
     },
     setProfileModal: (state, action) => {
-      state.profileModal = action.payload
+      state.profileModal = action.payload;
     },
     toggleProfileModal: (state) => {
-      state.profileModal = !state.profileModal
+      state.profileModal = !state.profileModal;
     },
   },
-})
+});
 
 export const {
   setIsLoggedIn,
@@ -56,6 +56,6 @@ export const {
   toggleShowMenu,
   setProfileModal,
   toggleProfileModal,
-} = pagesSlice.actions
+} = pagesSlice.actions;
 
-export default pagesSlice.reducer
+export default pagesSlice.reducer;

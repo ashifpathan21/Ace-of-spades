@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const QuestionModal = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default QuestionModal
+export default QuestionModal;

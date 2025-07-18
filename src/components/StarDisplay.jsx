@@ -8,7 +8,9 @@ const StarDisplay = ({ rating }) => {
     if (rating >= i) {
       stars.push(<FaStar key={i} className="text-yellow-400" size={24} />);
     } else if (rating >= i - 0.5) {
-      stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" size={24} />);
+      stars.push(
+        <FaStarHalfAlt key={i} className="text-yellow-400" size={24} />
+      );
     } else {
       stars.push(<FaRegStar key={i} className="text-gray-300" size={24} />);
     }

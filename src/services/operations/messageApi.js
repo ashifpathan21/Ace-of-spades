@@ -1,38 +1,38 @@
-import axios from 'axios' 
-import {apiConnector} from '../apiConnector.js'
-import {endpoints  } from '../apis.js'
-import toast from 'react-hot-toast'
+import axios from "axios";
+import { apiConnector } from "../apiConnector.js";
+import { endpoints } from "../apis.js";
+import toast from "react-hot-toast";
 
+const { SEND_MESSAGE, SEEN_MESSAGE } = endpoints;
 
- const {
-    SEND_MESSAGE ,
-    SEEN_MESSAGE
-  } = endpoints ;
+export function sendMessage({ to, text }, token) {
+  return async (dispatch) => {
+    //console.log(to , text ,token)
+    try {
+      const response = await apiConnector(
+        "POST",
+        SEND_MESSAGE,
+        {
+          to,
+          text,
+        },
+        { Authorization: `Bearer ${token}` }
+      );
 
-export function sendMessage({to, text} , token) {
-    return async (dispatch) => {
-         //console.log(to , text ,token)
-      try {
-        const response = await apiConnector("POST", SEND_MESSAGE, {
-          to , text 
-        } , { Authorization: `Bearer ${token}`});
-  
-        if (!response.data.success) {
-          toast.error("Message not sent. Try again.");
-          return;
-        }
-        //console.log(response)
-        toast.success("Message sent!");
-       return response.data
-  
-      } catch (error) {
-        //("SEND MESSAGE ERROR >>>", error);
-        toast.error("Could not send message.");
-        setLoading(false);
+      if (!response.data.success) {
+        toast.error("Message not sent. Try again.");
+        return;
       }
-    };
-  }
-
+      //console.log(response)
+      toast.success("Message sent!");
+      return response.data;
+    } catch (error) {
+      //("SEND MESSAGE ERROR >>>", error);
+      toast.error("Could not send message.");
+      setLoading(false);
+    }
+  };
+}
 
 export function markMessagesAsSeen(chatId, token) {
   return async () => {

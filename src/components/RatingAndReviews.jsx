@@ -31,7 +31,7 @@ const RatingAndReviews = ({ reviews }) => {
         className="flex gap-5 p-4 whitespace-nowrap"
         style={{ minWidth: "100%" }}
       >
-        {reviews.map((review , index) => (
+        {reviews.map((review, index) => (
           <div
             key={index}
             className="flex-shrink-0 w-[300px] h-auto p-4 backdrop-blur-3xl shadow shadow-cyan-400 hover:shadow-md transition-all duration-200 rounded-xl"
