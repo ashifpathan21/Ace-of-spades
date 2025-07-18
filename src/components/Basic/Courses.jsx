@@ -12,18 +12,20 @@ const Courses = ({ setCourseLoading }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setCourseLoading(true);
+    
     async function getCourses() {
+      
+    setCourseLoading(true)
       try {
         const courses = await dispatch(getAllCourses());
       } catch (error) {
         toast.error("Something went wrong");
       }
-    
+     setCourseLoading(false);
     }
 
     getCourses();
-      setCourseLoading(false);
+     
   }, []);
 
   const { courses } = useSelector((state) => state.courses);
