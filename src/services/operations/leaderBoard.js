@@ -29,7 +29,7 @@ export const getLeaderboardData = (token) => async (dispatch) => {
 
     return response.data;
   } catch (error) {
-    console.log("GET_LEADERBOARD_API ERROR:", error);
+    // console.log("GET_LEADERBOARD_API ERROR:", error);
     toast.error(
       error?.response?.data?.message ||
         "Something went wrong while fetching leaderboard"

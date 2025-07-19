@@ -39,7 +39,7 @@ const LeaderBoard = () => {
   return (
     <div className="min-h-screen h-screen  w-screen ">
       <Navbar />
-      <div className="w-full items-center p-2 mt-20  flex justify-around">
+      <div className="w-full items-center p-2 pt-20  flex justify-around">
         <h2 className=" text-2xl text-center font-semibold ">{`${
           collegeMode ? "College" : "Global"
         } Leaderboard`}</h2>

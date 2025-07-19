@@ -167,7 +167,7 @@ export function getPasswordResetToken(email, setEmailSent, setLoading) {
       toast.success("Reset Email Sent");
       setEmailSent(true);
     } catch (error) {
-      console.log("RESET PASSWORD TOKEN Error", error);
+      // console.log("RESET PASSWORD TOKEN Error", error);
       toast.error("Failed to send email for resetting password");
     }
     setLoading(false);
@@ -191,7 +191,7 @@ export function resetPassword(password, confirmPassword, token, setLoading) {
       toast.success("Password has been reset successfully");
       navigate("/login");
     } catch (error) {
-      console.log("RESET PASSWORD TOKEN Error", error);
+      // console.log("RESET PASSWORD TOKEN Error", error);
       toast.error("Unable to reset password");
     }
     setLoading(false);

@@ -13,9 +13,12 @@ import Message from "./pages/Message.jsx";
 import Logout from "./pages/Auth/Logout.jsx";
 import Task from "./pages/Task";
 import LeaderBoard from "./pages/LeaderBoard.jsx";
+import GenerateQuiz from "./pages/GenerateQuiz.jsx";
 import UpdatePassword from "./pages/UpdatePassword.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ViewUser from "./pages/ViewUser";
+import Quizzes from "./pages/Quizzes";
+import Quiz from "./pages/Quiz";
 import Enroll from "./pages/Enroll.jsx";
 import UserProtectedWrapper from "./pages/Auth/UserProtectedWrapper.jsx";
 import InstructorHome from "./pages/instructor/InstructorHome.jsx";
@@ -58,6 +61,30 @@ function App() {
               element={
                 <UserProtectedWrapper>
                   <MyProfile />
+                </UserProtectedWrapper>
+              }
+            ></Route>
+            <Route
+              path="/quiz"
+              element={
+                <UserProtectedWrapper>
+                  <Quizzes />
+                </UserProtectedWrapper>
+              }
+            ></Route>
+            <Route
+              path="/quiz/generate"
+              element={
+                <UserProtectedWrapper>
+                  <GenerateQuiz />
+                </UserProtectedWrapper>
+              }
+            ></Route>
+            <Route
+              path="/quiz/:id"
+              element={
+                <UserProtectedWrapper>
+                  <Quiz />
                 </UserProtectedWrapper>
               }
             ></Route>

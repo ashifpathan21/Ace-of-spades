@@ -45,7 +45,7 @@ export default function QuestionForm(props) {
           [];
         setQuestions(quest);
       } catch (error) {
-        console.error("Failed to fetch questions", error);
+        // console.error("Failed to fetch questions", error);
       } finally {
         setReloadQuestions(false);
       }
@@ -99,7 +99,7 @@ export default function QuestionForm(props) {
       setReloadQuestions(true);
       resetForm();
     } catch (error) {
-      console.error("Question save/update failed", error);
+      // console.error("Question save/update failed", error);
     }
     setWaiting(false);
   };
@@ -112,7 +112,7 @@ export default function QuestionForm(props) {
       );
       setQuestions((prev) => prev.filter((q) => q._id !== id));
     } catch (error) {
-      console.error("Delete failed", error);
+      // console.error("Delete failed", error);
     }
     setWaiting(false);
   };

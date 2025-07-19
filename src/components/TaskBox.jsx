@@ -65,7 +65,7 @@ const TaskBox = ({ questions, onComplete }) => {
       setSubmitted(false);
       setCorrectOption(null);
     } else {
-      console.log("working");
+
       onComplete(correctQuestions);
     }
   };

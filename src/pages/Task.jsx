@@ -47,7 +47,6 @@ const Task = () => {
           token
         )
       );
-      console.log(response);
       if (response) {
         toast.success("Task Completed");
         navigate(`/courses/${id}`);

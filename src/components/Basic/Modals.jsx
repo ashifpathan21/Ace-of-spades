@@ -70,6 +70,15 @@ const Modals = (props) => {
         >
           Leaderboard
         </button>
+        <button
+          className="flex md:hidden lg:hidden"
+          onClick={() => {
+            navigate("/quiz");
+            dispatch(setShowMenu(false));
+          }}
+        >
+          Quiz
+        </button>
 
         <button
           className="flex md:hidden lg:hidden"

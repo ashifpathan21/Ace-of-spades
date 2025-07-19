@@ -125,6 +125,14 @@ const Navbar = () => {
               <button 
               className='underline block p-1 hover:text-slate-300 transition-all duration-150 cursor-pointer'
                 onClick={() => {
+                  navigate("/quiz");
+                }}
+              >
+                Quiz
+              </button>
+              <button 
+              className='underline block p-1 hover:text-slate-300 transition-all duration-150 cursor-pointer'
+                onClick={() => {
                   navigate("/chats");
                 }}
               >

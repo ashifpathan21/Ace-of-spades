@@ -87,6 +87,12 @@ export const categories = {
   CATEGORIES_API: BASE_URL + "/course/showAllCategories",
 };
 
+export const quiz = {
+  GENERATE_QUIZ : BASE_URL+'/quiz/generate',
+  GET_QUIZ:BASE_URL+'/quiz/get-all',
+  SUBMIT_QUIZ:BASE_URL+'/quiz/submit',
+}
+
 // CATALOG PAGE DATA
 export const catalogData = {
   CATALOGPAGEDATA_API: BASE_URL + "/course/getCategoryPageDetails",

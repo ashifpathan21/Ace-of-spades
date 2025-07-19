@@ -91,7 +91,7 @@ export function updateQuestion(
       toast.success("Question updated successfully");
       return response.data.question;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("Failed to update question");
     }
   };
