@@ -420,7 +420,7 @@ const EditProfile = (props) => {
           <div className="w-full flex justify-center mt-4">
             <button
               type="submit"
-              disabled={userNameModified && userNameStatus !== "available"}
+              disabled={loading ||  userNameModified && userNameStatus !== "available"}
               className={`p-4 mt-3 mb-10 bg-green-500 rounded-lg font-semibold  ${
                 userNameModified && userNameStatus !== "available"
                   ? "opacity-50 cursor-not-allowed"

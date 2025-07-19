@@ -66,6 +66,7 @@ export function signUp(
         email,
         password,
         userName,
+        collegeName ,
         otp,
       });
 
