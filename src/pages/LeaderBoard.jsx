@@ -37,7 +37,7 @@ const LeaderBoard = () => {
     </div>
   }
   return (
-    <div className="min-h-screen h-screen  w-screen ">
+    <div className="min-h-screen h-full  w-screen ">
       <Navbar />
       <div className="w-full items-center p-2 pt-20  flex justify-around">
         <h2 className=" text-2xl text-center font-semibold ">{`${
@@ -59,7 +59,7 @@ const LeaderBoard = () => {
         </button>
       </div>
 
-      <div className=" flex flex-col gap-5   p-4 ">
+      <div className=" flex flex-col gap-5  mb-10  p-4 ">
         <TopThreeLeaderboard leaderboard={leaderboard} userId={user?._id} />
         <div className="max-h-[45vh] overflow-y-auto flex flex-col gap-5 px-3">
           {leaderboard?.slice(3).map((player, i) => (
