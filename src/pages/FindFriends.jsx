@@ -80,7 +80,7 @@ const FindFriends = () => {
 
   return (
     <div>
-      <div className="px-4 flex ">
+      <div className="px-4 flex  min-h-screen h-full">
         <div
           onClick={() => {
             navigate("/");

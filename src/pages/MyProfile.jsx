@@ -167,7 +167,7 @@ const MyProfile = () => {
             <h1 className="w-full p-2 text-center mb-2 text-xl flex justify-center font-semibold">
               Suggestions{" "}
             </h1>
-            <div className="w-[80%] grid md:grid-cols-2  lg:grid-cols-2 grid-cols-1 ">
+            <div className="w-[80%] grid md:grid-cols-2 gap-4 space-x-3 space-y-4  lg:grid-cols-2 grid-cols-1 ">
               {friendSuggestions?.map((friend, i) => (
                 <AddFriend
                   key={i}
