@@ -69,9 +69,14 @@ export function updateProfile(
   };
 }
 
-export function addCourse({ courseId }, token, setLoading) {
+export function addCourse({ courseId , price }, token, setLoading , navigate) {
   return async (dispatch) => {
     setLoading(true);
+
+    if(price === 0 ){
+      navigate(`/courses/payment/${courseId}`);
+      return
+    }
 
     try {
       const response = await apiConnector(
@@ -79,6 +84,7 @@ export function addCourse({ courseId }, token, setLoading) {
         ADD_COURSE,
         {
           courseId,
+          price
         },
         { Authorization: `Bearer ${token}` }
       );

@@ -7,6 +7,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import BackgroundEffect from "./components/BackgroundEffect.jsx";
 import "./components/BackgroundEffect.css";
 import MyProfile from "./pages/MyProfile.jsx";
+import PaymentPage from "./pages/PaymentPage.jsx";
 import Courses from "./pages/Courses.jsx";
 import FindFriends from "./pages/FindFriends.jsx";
 import Message from "./pages/Message.jsx";
@@ -97,11 +98,12 @@ function App() {
                 </UserProtectedWrapper>
               }
             ></Route>
+            <Route path="/courses" element={<Courses />}></Route>
             <Route
-              path="/courses"
+              path="/courses/payment/:id"
               element={
                 <UserProtectedWrapper>
-                  <Courses />
+                  <PaymentPage />
                 </UserProtectedWrapper>
               }
             ></Route>

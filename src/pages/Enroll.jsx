@@ -72,11 +72,16 @@ const Enroll = () => {
     setFeedback("");
     setRatingReviewModal(false);
   };
+    
 
   async function addCourses() {
+        if(course?.price !== 0 ){
+          navigate(`/courses/payment/${course?._id}`);
+          return 
+        }
     try {
       const responce = await dispatch(
-        addCourse({ courseId: course._id }, token, setLoading)
+        addCourse({ courseId: course._id , price:course?.price }, token, setLoading , navigate)
       );
       if (responce) {
         navigate("/courses");
@@ -184,7 +189,7 @@ const Enroll = () => {
                 className="prose  list-disc dark:prose-invert"
                 dangerouslySetInnerHTML={{ __html: course?.instructions }}
               />
-              {course?.price === 0 && (
+              {course?.price === 0 ? (
                 <button
                   onClick={() => {
                     user?.courses?.some((c) => c._id === course._id)
@@ -200,6 +205,23 @@ const Enroll = () => {
                   {user?.courses?.some((c) => c._id === course._id)
                     ? "Go to Course"
                     : "Enroll Now"}
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    user?.courses?.some((c) => c._id === course._id)
+                      ? navigate(`/courses/progress/${course._id}`)
+                      : addCourses();
+                  }}
+                  className={`p-2 text-xl capitalize ${
+                    user?.courses?.some((c) => c?._id === course?._id)
+                      ? "bg-green-400"
+                      : "bg-blue-400"
+                  } rounded-lg mt-10 text-slate-200 font-semibold`}
+                >
+                  {user?.courses?.some((c) => c._id === course._id)
+                    ? "Go to Course"
+                    : '₹ ' +  course?.price  + " Pay Now"}
                 </button>
               )}
             </div>

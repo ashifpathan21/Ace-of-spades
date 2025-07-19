@@ -110,3 +110,9 @@ export const settingsEndpoints = {
   DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
   ADD_COURSE: BASE_URL + "/profile/enroll",
 };
+
+export const paymentEndpoints = {
+  CAPTURE_PAYMENT: BASE_URL + "/payment/capturePayment",
+  VERIFY_SIGNATURE: BASE_URL + "/payment/verifySignature",
+  SEND_PAYMENT_SUCCESS_EMAIL: BASE_URL + "/payment/sendPaymentSuccessEmail",
+};
