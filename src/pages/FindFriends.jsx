@@ -80,7 +80,7 @@ const FindFriends = () => {
 
   return (
     <div>
-      <div className="px-4 flex  min-h-screen h-full">
+      <div className="px-4 flex ">
         <div
           onClick={() => {
             navigate("/");
@@ -120,7 +120,7 @@ const FindFriends = () => {
             </div>
           </div>
 
-          <div className="max-w-[450px] md:max-w-[700px] lg:max-w-[900px]   flex flex-col p-2 gap-4">
+          <div className="max-w-[450px] md:max-w-[700px] lg:max-w-[900px] h-full min-h-screen mb-40   flex flex-col p-2 gap-4">
             {loading ? (
               <div className="w-full gap-3 mb-10 flex justify-center items-center">
                 <span className="loader"></span>
