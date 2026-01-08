@@ -327,14 +327,7 @@ const Home = () => {
         <RatingAndReviews reviews={reviews} />
       </div>
 
-      <div
-        className="text-2xl mb-5 font-bold flex justify-center uppercase"
-        id="info"
-      >
-        our team
-      </div>
-      <ImageSlider images={SliderData} />
-
+     
       <WhyUs />
 
       <Footer />
